@@ -67,3 +67,11 @@ Order of functions:
 3. All other React Component LifeCycle methods
 4. All other methods in the order of the LifeCycle method they're called in
     - Any helper methods of a non-LifeCycle method are written directly below that method
+
+---
+## **Note to Author(Yes you @Dreamy_Jy)**
+
+Consider Adding Docs on:
+
+- Component Type Hierarchy
+- Component Data Flow.
