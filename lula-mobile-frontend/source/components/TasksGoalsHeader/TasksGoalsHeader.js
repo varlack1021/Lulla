@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import FloatingActionButton from "./FloatingActionButton";
-import HeaderTextButtonComponent from "./HeaderTextButtonComponent";
+import TasksGoalsHeaderTextButton from "../TasksGoalsHeader/TasksGoalsHeaderTextButton";
 
-class HeaderComponent extends Component {
+class TasksGoalsHeader extends Component {
     constructor() {
         super();
 
@@ -38,12 +38,12 @@ class HeaderComponent extends Component {
         return(
             <View >
                 <View style={styles.buttonHolder}>
-                    <HeaderTextButtonComponent selected={ this.state.button1 } onPress={ this.button1HandlePress }>
+                    <TasksGoalsHeaderTextButton selected={ this.state.button1 } onPress={ this.button1HandlePress }>
                         Tasks
-                    </HeaderTextButtonComponent>
-                    <HeaderTextButtonComponent selected={ this.state.button2 } onPress={ this.button2HandlePress }>
+                    </TasksGoalsHeaderTextButton>
+                    <TasksGoalsHeaderTextButton selected={ this.state.button2 } onPress={ this.button2HandlePress }>
                         Goals
-                    </HeaderTextButtonComponent>
+                    </TasksGoalsHeaderTextButton>
                 </View>
                 {/* <FloatingActionButton /> */}
             </View>
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HeaderComponent;
+export default TasksGoalsHeader;

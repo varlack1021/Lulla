@@ -1,13 +1,12 @@
 import { createMaterialTopTabNavigator } from "react-navigation";
-import WhatTab from "../screens/WhatTab";
-import WhenTab from "../screens/WhenTab";
-import StepsTab from "../screens/StepsTab";
-
+import WhatScreen from "../screens/WhatScreen";
+import WhenScreen from "../screens/WhenScreen";
+import StepsScreen from "../screens/StepsScreen";
 
 export default TaskAdditionNavigator = createMaterialTopTabNavigator({
-    WhatTab: { screen: WhatTab},
-    WhenTab: { screen: WhenTab},
-    StepsTab: { screen: StepsTab}
+    WhatTab: { screen: WhatScreen},
+    WhenTab: { screen: WhenScreen},
+    StepsTab: { screen: StepsScreen}
 }, {
     initialRouteName: "WhatTab",
     swipeEnabled: true,

@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import HeaderComponent from "../elements/HeaderComponent";
+import FloatingActionButton from '../elements/FloatingActionButton';
 
-export default class StepsTab extends Component{
+
+// TODO: Remove the FloatingActionButton 
+export default class WhatScreen extends Component{
     render() {
         return(
             <View style={styles.demoContainer}>
-                <Text style={ styles.demoText }>This the Steps tab</Text>
+                <Text style={ styles.demoText }>This the What tab</Text>
+                <FloatingActionButton action={ () => { this.props.navigation.navigate('MainScreen') } } />
             </View>
         );
     }

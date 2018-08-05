@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import FloatingActionButton from '../elements/FloatingActionButton';
 
-
-// TODO: Remove the FloatingActionButton 
-export default class WhatTab extends Component{
+export default class WhenScreen extends Component{
     render() {
         return(
             <View style={styles.demoContainer}>
-                <Text style={ styles.demoText }>This the What tab</Text>
-                <FloatingActionButton action={ () => { this.props.navigation.navigate('MainScreen') } } />
+                <Text style={ styles.demoText }>This the when tab</Text>
             </View>
         );
     }

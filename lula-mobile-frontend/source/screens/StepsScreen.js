@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default class WhenTab extends Component{
+export default class StepsScreen extends Component{
     render() {
         return(
             <View style={styles.demoContainer}>
-                <Text style={ styles.demoText }>This the when tab</Text>
+                <Text style={ styles.demoText }>This the Steps tab</Text>
             </View>
         );
     }

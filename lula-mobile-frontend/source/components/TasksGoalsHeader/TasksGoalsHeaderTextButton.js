@@ -6,7 +6,7 @@ import {
     StyleSheet
 } from "react-native";
 
-class HeaderTextButtonComponent extends Component {
+class TasksGoalsHeaderTextButton extends Component {
 
     render() {
         const properStyle = this.props.selected ? styles.selected : styles.notSelected;
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HeaderTextButtonComponent;
+export default TasksGoalsHeaderTextButton;
