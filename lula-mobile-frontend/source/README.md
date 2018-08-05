@@ -19,3 +19,8 @@ components > screens(Components used as screens) > navigation (The navigator pag
 Which are smart and which are dumb.
 
 We use feather through @expo\vector-icons
+
+Terms:
+Page - The full screen root component of the View Component passed into a Navigator Component.
+
+Screen - any view passed into a TabNavigator that has no(With ) header component.

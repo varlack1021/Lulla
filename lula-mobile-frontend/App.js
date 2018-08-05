@@ -1,43 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
-import GoalsTab from './components/screens/GoalsTab';
-import TasksTab from './components/screens/TasksTab';
-import WhatTab from './components/screens/WhatTab';
-import WhenTab from './components/screens/WhenTab';
-import StepsTab from './components/screens/StepsTab';
-import { 
-  createMaterialTopTabNavigator,
-  createSwitchNavigator
- } from 'react-navigation';
-import HeaderComponent from './components/elements/HeaderComponent';
+import {  createSwitchNavigator } from 'react-navigation';
+import TasksGoalsTabNavigator from './source/navigators/TasksGoalsTabNavigator';
+import TaskAdditionNavigator from './source/navigators/TaskAdditionNavigator';
 
-const MainTabNavigator = createMaterialTopTabNavigator({
-  TaskTab: { screen: TasksTab },
-  GoalTab: { screen: GoalsTab }
-}, {
-  tabBarComponent: HeaderComponent,
-  initialRouteName: "TaskTab",
-  initialLayout: {
-    height: 100,
-    width: 100
-  },
-  swipeEnabled: true,
-  order: ["TaskTab", "GoalTab"]
-});
 
-const TaskAdditionNavigator = createMaterialTopTabNavigator({
-  WhatTab: { screen: WhatTab },
-  WhenTab: { screen: WhenTab},
-  StepsTab: { screen: StepsTab}
-}, {
-  initialRouteName: "WhatTab",
-  swipeEnabled: true,
-  order: ["WhatTab", "WhenTab", "StepsTab"],
-  tabBarComponent: null
-});
+
 
 const TheApp = createSwitchNavigator({
-  MainScreen: { screen: MainTabNavigator },
+  MainScreen: { screen: TasksGoalsTabNavigator },
   AdditionStart: { screen: TaskAdditionNavigator }
 }, {
   initialRouteName: "MainScreen",
