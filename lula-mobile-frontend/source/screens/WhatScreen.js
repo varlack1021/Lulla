@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import FloatingActionButton from '../elements/FloatingActionButton';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 
 // TODO: Remove the FloatingActionButton 

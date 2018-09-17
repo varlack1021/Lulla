@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import FloatingActionButton from '../elements/FloatingActionButton';
-import HeaderTextButtonComponent from '../elements/HeaderTextButtonComponent';
-import SingleTask from '../elements/SingleTask';
+import FloatingActionButton from '../components/FloatingActionButton';
+import SingleTask from '../components/SingleTask';
 
 // TODO: delete this const
 const dummyData = [

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import FloatingActionButton from '../elements/FloatingActionButton';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 export class GoalsTab extends Component {
     render() {

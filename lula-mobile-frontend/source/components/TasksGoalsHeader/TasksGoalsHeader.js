@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import FloatingActionButton from "./FloatingActionButton";
+import FloatingActionButton from "../FloatingActionButton";
 import TasksGoalsHeaderTextButton from "../TasksGoalsHeader/TasksGoalsHeaderTextButton";
 
 class TasksGoalsHeader extends Component {
