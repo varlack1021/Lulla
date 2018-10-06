@@ -3,7 +3,7 @@ import WhatScreen from "../screens/WhatScreen";
 import WhenScreen from "../screens/WhenScreen";
 import StepsScreen from "../screens/StepsScreen";
 
-export default TaskAdditionNavigator = createMaterialTopTabNavigator({
+export default TaskAdditionProcessNavigator = createMaterialTopTabNavigator({
     WhatTab: { screen: WhatScreen},
     WhenTab: { screen: WhenScreen},
     StepsTab: { screen: StepsScreen}

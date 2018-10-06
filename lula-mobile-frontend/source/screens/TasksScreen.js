@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
+import TasksScreen_Header from "../components/TasksScreen_Header";
 import FloatingActionButton from '../components/FloatingActionButton';
 import SingleTask from '../components/SingleTask';
 
@@ -20,13 +21,16 @@ const dummyData = [
 ];
 
 // TODO: make variable file for your routes
-class TasksPage extends Component {
+class TasksScreen extends Component {
     render() {
         return (
             <View style = { styles.container }>
+                <TasksScreen_Header />
                 <FlatList
                     data = {dummyData}
-                    renderItem = {({item}) => <SingleTask key={item.dueDate} title={item.title} dueDate={item.dueDate}/>} />
+                    renderItem = {
+                        ({item}) => <SingleTask key={item.dueDate} title={item.title} dueDate={item.dueDate}/>
+                } />
                 <FloatingActionButton action={ () => {this.props.navigation.navigate('AdditionStart')} } />
             </View>
         );
@@ -40,4 +44,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TasksPage;
+export default TasksScreen;

@@ -67,7 +67,11 @@ Order of functions:
 3. All other React Component LifeCycle methods
 4. All other methods in the order of the LifeCycle method they're called in
     - Any helper methods of a non-LifeCycle method are written directly below that method
+---
+## TODOS
 
+* add all magic values to the appropriate constants file.
+* consider which styles to add to const file
 ---
 ## **Note to Author(Yes you @Dreamy_Jy)**
 

@@ -10,7 +10,7 @@ import {
 
 export default class FloatingActionButton extends Component {
     render() {
-        const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+        const Touchable = (Platform.OS === 'android')? TouchableNativeFeedback : TouchableOpacity;
         return (
             <View style={styles.container}>
                 <Touchable onPress={this.props.action}>
