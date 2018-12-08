@@ -3,6 +3,7 @@ import {  createSwitchNavigator } from 'react-navigation';
 import  TasksScreen from "./source/screens/TasksScreen";
 import TaskAdditionProcessNavigator from './source/navigators/TaskAdditionProcessNavigator';
 
+// TODO: find away to maintain state only in MainScreen
 const RootNavigator = createSwitchNavigator({
   MainScreen: { screen: TasksScreen },
   AdditionStart: { screen: TaskAdditionProcessNavigator }

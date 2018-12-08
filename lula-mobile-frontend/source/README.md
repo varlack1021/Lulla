@@ -70,11 +70,16 @@ Order of functions:
 ---
 ## TODOS
 
-* add all magic values to the appropriate constants file.
-* consider which styles to add to const file
----
-## **Note to Author(Yes you @Dreamy_Jy)**
+* add all magic values to the appropriate constants file
+    * Create Sperate constant files for the different types of constants (paths, styles, content, etc...)
+    * consider which styles to add to const file
+* Consider finding or writing(designing) a tool to work aid developer working on 1 or a few screens at a time. Styling help (Jy Style). 
 
+* standardize usage of ' and "
+---
+## **Note to Author**
+
+(Yes you @Dreamy_Jy)
 Consider Adding Docs on:
 
 - Component Type Hierarchy

@@ -29,8 +29,10 @@ class TasksScreen extends Component {
                 <FlatList
                     data = {dummyData}
                     renderItem = {
-                        ({item}) => <SingleTask key={item.dueDate} title={item.title} dueDate={item.dueDate}/>
-                } />
+                        ({item}) => <SingleTask title={item.title} dueDate={item.dueDate}/>
+                    }
+                    keyExtractor={(item) => item.dueDate}
+                />
                 <FloatingActionButton action={ () => {this.props.navigation.navigate('AdditionStart')} } />
             </View>
         );
