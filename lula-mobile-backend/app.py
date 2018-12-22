@@ -11,7 +11,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # app initialization
 app = Flask(__name__)
-app.debug = False
+app.debug = True
 
 # Configs TODO
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
@@ -124,11 +124,12 @@ class CreateTodo(graphene.Mutation):
         db.session.commit()
         return CreateTodo(todo=todo)
 
+
 class DeleteTodo(graphene.Mutation):
     class Arguments:
         id = graphene.ID(required=True)
     
-    todo = graphene.Field(lambda: TodoObject)
+    todo = graphene.Field(lambda: TodoObject) # NOTE Why this Line?
 
     def mutate(self, info, id):
         todo = Todo.query.get(id)
@@ -139,10 +140,28 @@ class DeleteTodo(graphene.Mutation):
         
         return todo
 
+
+class ToggleTodo(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+    
+    todo = graphene.Field(lambda: TodoObject)
+
+    def mutate(self, info, id):
+        todo = Todo.query.get(id)
+        
+        if todo is not None:
+            todo.is_complete = not todo.is_complete
+            db.session.commit()
+
+        return todo
+
+
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_todo = CreateTodo.Field()
     delete_todo = DeleteTodo.Field()
+    toggle_todo = ToggleTodo.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
 
