@@ -109,6 +109,7 @@ class CreatePost(graphene.Mutation):
         db.session.commit()
 
         return CreatePost(post=post)
+
 class CreateTodo(graphene.Mutation):
     class Arguments:
         title = graphene.String(required=True)
@@ -118,17 +119,30 @@ class CreateTodo(graphene.Mutation):
     
     # TODO write this method without the conditional
     def mutate(self, info, title, description=None):
-        todo = Todo(title=title)
-
-        if description is not None:
-            todo.info = description
-        
+        todo = Todo(title=title, info=description)        
         db.session.add(todo)
         db.session.commit()
+        return CreateTodo(todo=todo)
+
+class DeleteTodo(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+    
+    todo = graphene.Field(lambda: TodoObject)
+
+    def mutate(self, info, id):
+        todo = Todo.query.get(id)
+
+        if todo is not None:
+            db.session.delete(todo)
+            db.session.commit()
+        
+        return todo
 
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_todo = CreateTodo.Field()
+    delete_todo = DeleteTodo.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
 
