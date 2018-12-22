@@ -2,12 +2,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
-
 import graphene
 from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
-
 from flask_graphql import GraphQLView
-
 import datetime
 
 basedir = os.path.abspath(os.path.dirname(__file__))

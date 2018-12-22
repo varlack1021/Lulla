@@ -16,8 +16,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-*.xd
-
 .vscode
 */__pycache__
+*.sql*
