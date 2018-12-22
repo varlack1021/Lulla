@@ -29,7 +29,7 @@ db = SQLAlchemy(app)
 TODO_TITLE_MAX_LENGTH = 50
 
 # Models TODO
-#delete
+# Reformat TODO
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -67,8 +67,8 @@ class Todo(db.Model):
         return '<Todo %r>' % self.title
 
 
-class Event(db.Model):
-    pass
+# class Event(db.Model):
+#     pass
 
 
 # Schema Objects TODO
@@ -82,10 +82,16 @@ class UserObject(SQLAlchemyObjectType):
         model = User
         interfaces = (graphene.relay.Node, )
 
+class TodoObject(SQLAlchemyObjectType):
+    class Meta:
+        model = Todo
+        interfaces = (graphene.relay.Node, )
+
 class Query(graphene.ObjectType):
     node = graphene.relay.Node.Field()
     all_posts = SQLAlchemyConnectionField(PostObject)
     all_users = SQLAlchemyConnectionField(UserObject)
+    all_todos = SQLAlchemyConnectionField(TodoObject)
 
 class CreatePost(graphene.Mutation):
     class Arguments:
