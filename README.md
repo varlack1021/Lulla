@@ -1,15 +1,8 @@
 # Lula
 
-A productivity app that currently:'
-
-- makes it easy to develop make SMART goals.
-
-***
+A productivity app dedicated to help young people manage the one reasource we all have in equal measure, time, to create the life they want.
 
 ## Getting Started
-
-Assuming your using npm just run the following in your shell:
-
-```bash
-npm install && npm start
-```
+### Download the Dependencies
+### Download the Project
+### Run the Project
