@@ -9,45 +9,29 @@ import datetime
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+# TODO create a new naming system, to map concepts across the app.
+# TODO add testing, and linting
+
 # app initialization
 app = Flask(__name__)
 app.debug = True
 
-# Configs TODO
+# Configs
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-# Modules TODO
+# Modules
 db = SQLAlchemy(app)
 
-# Constants TODO
-
+# Constants
 TODO_TITLE_MAX_LENGTH = 50
 
-# Models TODO
-# Reformat TODO
-class User(db.Model):
-    __tablename__ = 'users'
+# Models
+# TODO Implement
+# class User(db.Model):
+#     __tablename__ = 'users'
 
-    uuid = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(256), index=True, unique=True)
-    posts = db.relationship('Post', backref='author')
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
-# Delete
-class Post(db.Model):
-    __tablename__ = 'posts'
-
-    uuid = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(256), index=True)
-    body = db.Column(db.Text)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.uuid'))
-
-    def __repr__(self):
-        return '<Post %r>' % self.title
 
 class Todo(db.Model):
     __tablename__ = 'todos'
@@ -63,22 +47,12 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Todo %r>' % self.title
 
-
+# TODO Implement
 # class Event(db.Model):
-#     pass
+#     __tablename__ = 'events'
 
 
-# Schema Objects TODO
-class PostObject(SQLAlchemyObjectType):
-    class Meta:
-        model = Post
-        interfaces = (graphene.relay.Node, )
-
-class UserObject(SQLAlchemyObjectType):
-    class Meta:
-        model = User
-        interfaces = (graphene.relay.Node, )
-
+# Schema Objects
 class TodoObject(SQLAlchemyObjectType):
     class Meta:
         model = Todo
@@ -86,29 +60,8 @@ class TodoObject(SQLAlchemyObjectType):
 
 class Query(graphene.ObjectType):
     node = graphene.relay.Node.Field()
-    all_posts = SQLAlchemyConnectionField(PostObject)
-    all_users = SQLAlchemyConnectionField(UserObject)
     all_todos = SQLAlchemyConnectionField(TodoObject)
 
-class CreatePost(graphene.Mutation):
-    class Arguments:
-        title = graphene.String(required=True)
-        body = graphene.String(required=True)
-        username = graphene.String(required=True)
-
-    post = graphene.Field(lambda: PostObject)
-
-    def mutate(self, info, title, body, username):
-        user = User.query.filter_by(username=username).first()
-        post = Post(title=title, body=body)
-
-        if user is not None:
-            post.author = user
-        
-        db.session.add(post)
-        db.session.commit()
-
-        return CreatePost(post=post)
 
 class CreateTodo(graphene.Mutation):
     class Arguments:
@@ -117,7 +70,6 @@ class CreateTodo(graphene.Mutation):
     
     todo = graphene.Field(lambda: TodoObject)
     
-    # TODO write this method without the conditional
     def mutate(self, info, title, description=None):
         todo = Todo(title=title, info=description)        
         db.session.add(todo)
@@ -158,14 +110,15 @@ class ToggleTodo(graphene.Mutation):
 
 
 class Mutation(graphene.ObjectType):
-    create_post = CreatePost.Field()
     create_todo = CreateTodo.Field()
     delete_todo = DeleteTodo.Field()
     toggle_todo = ToggleTodo.Field()
+    # TODO consider making an edit_todo mutation
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
 
-# Routes TODO
+# Routes
+# TODO refactor this
 app.add_url_rule(
     '/graphql',
     view_func=GraphQLView.as_view(
