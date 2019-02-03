@@ -1,0 +1,59 @@
+cd schema {
+  query: Query
+  mutation: Mutation
+}
+
+type CreateTodo {
+  todo: TodoObject
+}
+
+scalar DateTime
+
+type DeleteTodo {
+  todo: TodoObject
+}
+
+type Mutation {
+  createTodo(description: String, title: String!): CreateTodo
+  deleteTodo(id: ID!): DeleteTodo
+  toggleTodo(id: ID!): ToggleTodo
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  node(id: ID!): Node
+  allTodos(before: String, after: String, first: Int, last: Int): TodoObjectConnection
+}
+
+type TodoObject implements Node {
+  uuid: ID!
+  title: String!
+  info: String
+  isComplete: Boolean!
+  creationDateTime: DateTime!
+  id: ID!
+}
+
+type TodoObjectConnection {
+  pageInfo: PageInfo!
+  edges: [TodoObjectEdge]!
+}
+
+type TodoObjectEdge {
+  node: TodoObject
+  cursor: String!
+}
+
+type ToggleTodo {
+  todo: TodoObject
+}
