@@ -10,14 +10,15 @@ import {
 import * as constants from "./Constants";
 
 
-function fetchQuery(operation, variables) {
+function fetchQuery( operation, variables) {
+    
     return fetch( constants.BACKEND_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            query: operation.text,
+            query: operation.params.text,
             variables,
         })
     }).then( response => {

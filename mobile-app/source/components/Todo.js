@@ -45,7 +45,7 @@ export default class Todo extends React.Component {
             );
         }
 
-        const icon = (this.state.selected)? constants.TODO_STATUS_ICON_DEFAULT: constants.TODO_STATUS_ICON_SELECTED
+        const icon = (this.state.selected)? constants.TODO_STATUS_ICON_SELECTED : constants.TODO_STATUS_ICON_DEFAULT;
         return(
             <Todo_Default statusIcon={icon} longPress={this._handleLongPress} shortPress={this._handleShortPress} title={this.props.title} dueDate={this.props.dueDate} />
         );
