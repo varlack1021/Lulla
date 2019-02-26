@@ -27,15 +27,34 @@ export default class Todo extends React.Component {
     }
 
     _handleShortPress(action) {
-        Alert.alert("Place holder", "Change this later");
+        console.log("This Todo just recieved a Short press");
+        if(this.state.deletable == true) {
+            if(action == true) {
+                Alert.alert("Place holder", "Soon this todo will have been deleted");
+            } else {
+                this._toggleDeletability();
+            }
+            return;
+        }
+
+        let newState = (this.state.selected)? false:true;
+
+        this.setState({
+            selected: newState
+        });
     }
 
     _handleLongPress() {
-        Alert.alert("Place holder", "Change this later");
+        console.log("This Todo just recieved a long press");
+        this._toggleDeletability()
     }
 
     _toggleDeletability() {
-        Alert.alert("Place holder", "Change this later");
+        Alert.alert("Place holder", "This Todo is now Deletable");
+        let newState = (this.state.deletable)? false: true;
+        this.setState({
+            deletable: newState
+        });
     }
 
     render() {
