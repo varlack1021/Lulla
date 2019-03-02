@@ -60,13 +60,13 @@ export default class Todo extends React.Component {
     render() {
         if (this.state.deletable) {
             return(
-                <Todo_Deleteable longPress={this._handleLongPress} shortPress={this._handleShortPress} title={this.props.title} dueDate={this.props.dueDate} />
+                <Todo_Deleteable longPress={this._handleLongPress} shortPress={this._handleShortPress} data={this.props.data} />
             );
         }
 
         const icon = (this.state.selected)? constants.TODO_STATUS_ICON_SELECTED : constants.TODO_STATUS_ICON_DEFAULT;
         return(
-            <Todo_Default statusIcon={icon} longPress={this._handleLongPress} shortPress={this._handleShortPress} title={this.props.title} dueDate={this.props.dueDate} />
+            <Todo_Default statusIcon={icon} longPress={this._handleLongPress} shortPress={this._handleShortPress} data={this.props.data} />
         );
     }
 }
@@ -81,10 +81,10 @@ function Todo_Default(props) {
                 </View>
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>
-                        {props.title}
+                        {props.data.title}
                     </Text>
                     <Text styls={styles.dueDate}>
-                        {props.dueDate}
+                        {props.data.creationDateTime}
                     </Text>
                 </View>
             </View>
@@ -103,10 +103,10 @@ function Todo_Deleteable(props) {
             <TouchableWithoutFeedback onLongPress={props.longPress} onPress={props.shortPress}>
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>
-                        {props.title}
+                        {props.data.title}
                     </Text>
                     <Text style={styles.dueDate}>
-                        {props.dueDate}
+                        {props.data.creationDateTime}
                     </Text>
                 </View>
             </TouchableWithoutFeedback>

@@ -19,20 +19,6 @@ import TodoListHeader from "../components/TodoListHeader";
 
 export default class TodoList extends React.Component {
     render() {
-        const dummyData = [
-            {
-                title: "Walk the dog",
-                dueDate: "09/02/2013"
-            },
-            {
-                title: "Go to school",
-                dueDate: "09/07/2013"
-            },
-            {
-                title: "Finish your article ",
-                dueDate: "09/06/2013"
-            }
-        ];
 
         return(
             <QueryRenderer
@@ -82,7 +68,7 @@ function ListOfTodos(props) {
             <FlatList
                 data={props.data}
                 renderItem={
-                    ({item}) => <Todo title={item.node.title} dueDate={item.node.creationDateTime}/>
+                    ({item}) => <Todo data={item.node}/>
                 }
                 keyExtractor={(item)=>item.node.id}
             />
