@@ -1,5 +1,5 @@
-from .base import Base
-from .model_people import ModelPeople
+from base import Base
+from model_people import ModelPeople
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
