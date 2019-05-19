@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a1c0c11fbeeeee9d51e96b0a181e5b42
+ * @relayHash bcb99c947476a467ff17420873d51316
  */
 
 /* eslint-disable */
@@ -17,6 +17,7 @@ export type TodoListAppleJaxQueryResponse = {|
         +title: string,
         +isComplete: boolean,
         +creationDateTime: any,
+        +uuid: string,
         +id: string,
       |}
     |}>
@@ -37,6 +38,7 @@ query TodoListAppleJaxQuery {
         title
         isComplete
         creationDateTime
+        uuid
         id
       }
     }
@@ -97,6 +99,13 @@ var v0 = [
               {
                 "kind": "ScalarField",
                 "alias": null,
+                "name": "uuid",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
                 "name": "id",
                 "args": null,
                 "storageKey": null
@@ -128,11 +137,11 @@ return {
     "operationKind": "query",
     "name": "TodoListAppleJaxQuery",
     "id": null,
-    "text": "query TodoListAppleJaxQuery {\n  allTodos {\n    edges {\n      node {\n        title\n        isComplete\n        creationDateTime\n        id\n      }\n    }\n  }\n}\n",
+    "text": "query TodoListAppleJaxQuery {\n  allTodos {\n    edges {\n      node {\n        title\n        isComplete\n        creationDateTime\n        uuid\n        id\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '281fd559d59f47a47f28b5424bd4454c';
+(node/*: any*/).hash = 'c3d785f7f0443bccb4b0bb91b8480478';
 module.exports = node;

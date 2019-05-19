@@ -19,5 +19,7 @@ yarn-error.log*
 
 .vscode/
 
-*/__pycache__
+*__pycache__/
 *.sql*
+*.db
+*.pyc

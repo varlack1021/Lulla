@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import * as constants from "../Constants";
 import { FontAwesome } from "@expo/vector-icons";
+import ChangeTodoCompletionStatusMutation from "../mutations/ChangeTodoCompletionStatusMutation";
 
 // TODO reduce the size of your props.
 
@@ -16,8 +17,9 @@ export default class Todo extends React.Component {
     //TODO write code that allows this component to be init with internet data.
     constructor(props) {
         super(props);
+        
         this.state = {
-            selected: false,
+            selected: this.props.data.isComplete,
             deletable: false
         }
 
@@ -27,7 +29,6 @@ export default class Todo extends React.Component {
     }
 
     _handleShortPress(action) {
-        console.log("This Todo just recieved a Short press");
         if(this.state.deletable == true) {
             if(action == true) {
                 Alert.alert("Place holder", "Soon this todo will have been deleted");
@@ -36,17 +37,22 @@ export default class Todo extends React.Component {
             }
             return;
         }
-
+        
+        ChangeTodoCompletionStatusMutation.commit(
+            this.props.relay_environment, 
+            this.props.data.uuid
+        );
+        /**
         let newState = (this.state.selected)? false:true;
 
         this.setState({
             selected: newState
         });
+        */
     }
 
     _handleLongPress() {
-        console.log("This Todo just recieved a long press");
-        this._toggleDeletability()
+         this._toggleDeletability()
     }
 
     _toggleDeletability() {

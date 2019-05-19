@@ -31,6 +31,7 @@ export default class TodoList extends React.Component {
                                     title
                                     isComplete
                                     creationDateTime
+                                    uuid
                                     id
                                 }
                             }
@@ -38,7 +39,7 @@ export default class TodoList extends React.Component {
                     }
                 `}
                 variables={{}}
-                render={({error, props}) => {
+                render={({error, props }) => {
                     if(error) {
                         // Replace with appropriate error screen
                         console.log(error)
@@ -50,9 +51,9 @@ export default class TodoList extends React.Component {
                         // Replace with appropriate Loading screen
                         return(<Text>Loading...</Text>);
                     }
-
+                    
                     return(
-                        <ListOfTodos data={props.allTodos.edges}/>
+                        <ListOfTodos data={props.allTodos.edges} relay_environment={environment}/>
                     );
                 }}
                 
@@ -68,7 +69,7 @@ function ListOfTodos(props) {
             <FlatList
                 data={props.data}
                 renderItem={
-                    ({item}) => <Todo data={item.node}/>
+                    ({item}) => <Todo data={item.node} relay_environment={environment}/>
                 }
                 keyExtractor={(item)=>item.node.id}
             />
