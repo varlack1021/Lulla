@@ -1,7 +1,8 @@
 """
 The `database` package encapsulates all the database management capabilities and exposes it to the rest of the app.
 
-Data models can be found in models(`database.models`) subpackage.
+Sub-Packages:
+    `database.models`: exposes the data models/tables used in this app.
 """
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base

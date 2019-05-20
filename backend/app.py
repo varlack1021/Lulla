@@ -2,8 +2,9 @@
 from flask import Flask
 from database import Session
 from database.models import TodoDBModel
-import graphene
-from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
+# import graphene
+# from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
+from api import schema
 from flask_graphql import GraphQLView
 
 # TODO create a new naming system, to map concepts across the app.
@@ -22,14 +23,15 @@ app.debug = True
 session = Session()
 
 # Schema Objects
-class TodoObject(SQLAlchemyObjectType):
-    class Meta:
-        model = TodoDBModel
-        interfaces = (graphene.relay.Node, )
+# class TodoObject(SQLAlchemyObjectType):
+#     class Meta:
+#         name = "Todo"
+#         model = TodoDBModel
+#         interfaces = (graphene.relay.Node, )
 
-class Query(graphene.ObjectType):
-    node = graphene.relay.Node.Field()
-    all_todos = SQLAlchemyConnectionField(TodoObject)
+# class Query(graphene.ObjectType):
+#     node = graphene.relay.Node.Field()
+#     all_todos = SQLAlchemyConnectionField(TodoObject)
 
 '''
 class CreateTodo(graphene.Mutation):
@@ -85,7 +87,7 @@ class Mutation(graphene.ObjectType):
     # TODO consider making an edit_todo mutation
 '''
 
-schema = graphene.Schema(query=Query)#, mutation=Mutation)
+# schema = graphene.Schema(query=Query)#, mutation=Mutation)
 
 # Routes
 # TODO refactor this
@@ -94,7 +96,8 @@ app.add_url_rule(
     view_func=GraphQLView.as_view(
         'graphql',
         schema=schema,
-        graphiql=True
+        graphiql=True,
+        get_context=lambda : {'db_connection': session}
     )
 )
 

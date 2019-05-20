@@ -1,5 +1,5 @@
 '''
-This code contains all the constants associated with database
+This file contains all the constants associated with database
 functionality.
 '''
 
