@@ -10,9 +10,9 @@ db_file_name = 'todos.db'
 db_url = db_dialect+db_path+db_file_name
 
 '''
-NOTE sqlite won't be used in the future
-therefore our database URLs will look radically different
-below are some variables that make more sense in the future
+NOTE sqlite won't be used in the future therefore our database URLs
+will look radically different below are some variables that make more
+sense in the future
 
 
 Generalized database URL > dialect+driver://username:password@host:port/database

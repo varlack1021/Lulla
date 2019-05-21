@@ -26,3 +26,6 @@ class TodoDBModel(Base):
     date_completed = Column('date_completed', DateTime, default=update_date_completed, onupdate=update_date_completed, doc='')
     due_date = Column('due_date', DateTime)
     parent_id = Column('parent_id', Integer, ForeignKey('todos.id'))
+
+    def __repr__(self):
+        return "<Todo(id={0}, title={1}, completion_status={2}, ...)>".format(self.id, self.title, self.completed)

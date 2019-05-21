@@ -27,7 +27,11 @@ def resolve_get_todos(todo, info, everything=False, amount=5):
     This is the resolver that used to get todos from the database.
 
     Parameters:
-        `amount`: 
+        `amount` integer: a greater than or equal to zero int that determines how many todos will be returned.
+        !!Warning!! Setting an amount only guarantees that the server may give up to an no more than that
+        amount. 
+
+        `all` boolean: 
         If `all` is set to True, all values of amount are overridden. 
     '''
     db = info.context.get('db_connection')
