@@ -1,1 +1,1 @@
-from .todo_inputs import CreateTodosInput
+from .todo_inputs import CreateTodoInput, DeleteTodoInput, EditTodoInput

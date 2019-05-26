@@ -11,14 +11,14 @@ class EditableTodoAttributes:
 class SelectorTodoAttributes:
     id = graphene.ID(name='id', description='')
 
-class CreateTodosInput(graphene.InputObjectType, EditableTodoAttributes):
+class CreateTodoInput(graphene.InputObjectType, EditableTodoAttributes):
     '''Arguments to create a Todo.'''
     title = graphene.String(name='title', description='', required=True)
 
-class DeleteTodosInput(graphene.InputObjectType):
+class DeleteTodoInput(graphene.InputObjectType, SelectorTodoAttributes):
     '''Arguments to delete a Todo.'''
-    pass
+    id = graphene.ID(name='id', description='', required=True)
 
-class EditTodoInput(graphene.InputObjectType):
+class EditTodoInput(graphene.InputObjectType, SelectorTodoAttributes, EditableTodoAttributes):
     '''Arguments to edit a Todo.'''
-    pass
+    id = graphene.ID(name='id', description='', required=True)

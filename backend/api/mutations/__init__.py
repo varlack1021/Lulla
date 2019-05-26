@@ -1,1 +1,1 @@
-from .todo_mutations import CreateTodo
+from .todo_mutations import CreateTodos, DeleteTodos, EditTodos

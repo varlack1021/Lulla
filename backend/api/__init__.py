@@ -1,6 +1,6 @@
 import graphene
 from .objects import TodoType as TodoAPI, resolve_get_todos
-from .mutations import CreateTodo
+from .mutations import CreateTodos, DeleteTodos, EditTodos
 
 class Query(graphene.ObjectType):
     get_todos = graphene.List(
@@ -10,6 +10,8 @@ class Query(graphene.ObjectType):
         resolver=resolve_get_todos)
 
 class Mutation(graphene.ObjectType):
-    create_todo = CreateTodo.Field()
+    create_todos = CreateTodos.Field()
+    delete_todos = DeleteTodos.Field()
+    edit_todos = EditTodos.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
