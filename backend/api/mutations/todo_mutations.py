@@ -4,14 +4,26 @@ from ..objects import TodoType as TodoAPI
 from database.models import TodoDBModel as TodoDB
 from constants import db_key
 
+'''
+!!WARNING!!: None of these mutations been tested comprehensivily. Please test before product usable.
+'''
 
 class CreateTodos(graphene.Mutation):
+    '''
+    A mutation to create todos
+    '''
     class Arguments:
         todo_data_list = graphene.List(graphene.NonNull(CreateTodoInput), required=True)
 
     created_todo_list = graphene.Field(graphene.List(TodoAPI))
 
     def mutate(self, info, todo_data_list):
+        '''
+        Adds todos to the database, given a list of objects containing the data they should be initialized with.
+
+        !!Warning!! this mutatation is untested in handling parent_id inputs, and is still can't deal with local
+        parenting.
+        '''
         db = info.context.get(db_key)
         todo_list = []
         
@@ -24,12 +36,18 @@ class CreateTodos(graphene.Mutation):
         return CreateTodos(created_todo_list=todo_list)
 
 class DeleteTodos(graphene.Mutation):
+    '''
+    A mutation to delete todos.
+    '''
     class Arguments:
         todo_id_list = graphene.List(graphene.NonNull(DeleteTodoInput), required=True)
     
     deleted_todo_list = graphene.Field(graphene.List(TodoAPI))
 
     def mutate(self, info, todo_id_list):
+        '''
+        Deletes todos permanently from the database, give a list of their ids.
+        '''
         db = info.context.get(db_key)
         deleted = []
 
@@ -45,6 +63,9 @@ class DeleteTodos(graphene.Mutation):
         return DeleteTodos(deleted_todo_list=deleted)
 
 class EditTodos(graphene.Mutation):
+    '''
+    A mutation to edit todos.
+    '''
     class Arguments:
         todo_and_edit_list = graphene.List(graphene.NonNull(EditTodoInput), required=True)
     

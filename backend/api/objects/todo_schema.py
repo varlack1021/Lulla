@@ -28,18 +28,12 @@ def resolve_get_todos(todo, info, everything=False, amount=5):
 
     Parameters:
         `amount` integer: a greater than or equal to zero int that determines how many todos will be returned.
-        !!Warning!! Setting an amount only guarantees that the server may give up to an no more than that
+        !!Warning!! Setting an amount only guarantees that the server may give up to and no more than that
         amount. 
 
-        `all` boolean: 
-        If `all` is set to True, all values of amount are overridden. 
+        `all` boolean: a boolean indicating wheither or not all todos should be returned.
+        If `all` is set to True, `amount`'s values is arrbitary. 
     '''
     db = info.context.get('db_connection')
     data = db.query(TodoDBModel).all()
     return data if everything else data[:amount]
-    
-
-"""
-Can I build a whole database in 10 mins(realistic timebased on my keystrokes per min.)?
-
-"""

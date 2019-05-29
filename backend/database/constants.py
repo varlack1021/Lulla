@@ -24,9 +24,11 @@ db_driver, db_username, db_password, db_host, db_port = [None, None, None, None,
 
 # Todo Database Model
 todo_id_description = 'The unique identifier(id) of the todo.'
-todo_title_description = ''
-todo_description_description = ''
-todo_date_completed_description = ''
-todo_completed_description = ''
-
+todo_title_description = 'The title of the todo. Also serves a short description of what should be done.'
+todo_description_description = 'An involved description of the todo.'
+todo_date_completed_description = 'A datetime string containing the date and time when the todo was completed. Is null when the todo\'s complete value is set to false, and resets it\'s value everytime todo is set to true.'
+todo_completed_description = 'A boolean representing whether or not the todo has been completed.'
+todo_due_date_description = 'A datetime string containing the date and time when the todo should be completed.'
+todo_parent_id_description = 'The ID of this todo\'s parent todo.'
+todo_date_created_description = 'A datetime string containing the date and time when the todo was created.'
 # Todo Database Model
