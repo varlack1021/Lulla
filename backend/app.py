@@ -66,7 +66,9 @@ The Database Model or the Schema
 - Why does the delete_todos mutation work?
 
 
-Create seperate mechanisms for permanent and temporary deletion. 
+TODO Create seperate mechanisms for permanent and temporary deletion.
+
+TODO Implement good logging, and create a debugging state for your project.
 '''
 '''NOTE: Challenges
 Can I build a whole database in 10 mins(realistic timebased on my keystrokes per min.)?

@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
+import TodoView from "./source/ui/components/TodoView.js";
 
 Testdata = {
   "data": {
@@ -154,13 +155,12 @@ const instructions = Platform.select({
 });
 
 type Props = {};
+
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View>
+        <TodoView/>
       </View>
     );
   }
@@ -184,3 +184,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+/**
+ * Learn to use flow, buck, and babel
+ * 
+ * ~~~Todo Component
+ * Refactor this component to make its code more elegant: use the various APIs (Stylesheet, touchables, Platform), and Pro Design Patterns
+ */
