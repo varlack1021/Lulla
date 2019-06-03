@@ -160,7 +160,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View>
-        <TodoView/>
+        <TodoView title='Jordane On the Beat' dueDate='act up you can get smacked up'/>
       </View>
     );
   }
