@@ -56,7 +56,7 @@ export default class TodoView extends Component {
         
 
         if(this.state.deletable) {
-            checkBoxShortPressAction = (event)=>{Alert.alert("Todo Deleted!!")};
+            checkBoxShortPressAction = (event)=>{Alert.alert("Todo Deleted!")};
             checkBoxLongPressAction = null;
             todoShortPressAction = this._toggleDeletable;
             todoLongPressAction = null;
@@ -102,6 +102,8 @@ export default class TodoView extends Component {
 const styles = StyleSheet.create({
     todoContainer: {
         flexDirection:"row",
+        paddingTop: 8,
+        paddingBottom: 8
     },
     checkBoxDefault: {
         height: 25,
