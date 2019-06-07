@@ -69,6 +69,9 @@ The Database Model or the Schema
 TODO Create seperate mechanisms for permanent and temporary deletion.
 
 TODO Implement good logging, and create a debugging state for your project.
+~~~ NOTE: Setup
+inorder for the db to be properly created the Models must be imported first
+
 '''
 '''NOTE: Challenges
 Can I build a whole database in 10 mins(realistic timebased on my keystrokes per min.)?

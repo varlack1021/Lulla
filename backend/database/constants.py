@@ -6,7 +6,7 @@ functionality.
 # Database URL
 db_dialect = 'sqlite:///' 
 db_path = '/Users/jordanethomas/Projects/Mobile-Apps/Lula/backend/database/data/'
-db_file_name = 'todos.db'
+db_file_name = 'todos.sqlite'
 db_url = db_dialect+db_path+db_file_name
 
 '''

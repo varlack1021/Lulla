@@ -1,5 +1,6 @@
 import logging
 import sys
+from database.models import TodoDBModel
 from database import Base, engine
 
 # Load logging configuration
@@ -12,4 +13,4 @@ logging.basicConfig(
 
 if __name__ == '__main__':
     log.info('Create database')
-    Base.metadate.create_all(engine)
+    Base.metadata.create_all(engine)
