@@ -1,130 +1,24 @@
 # Imports
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-import os
-import graphene
-from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
 from flask_graphql import GraphQLView
-import datetime
+from database import db_session
+from api import schema
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+from constants import db_key
 
 # TODO create a new naming system, to map concepts across the app.
 # TODO add testing, and linting
 
-# app initialization
 app = Flask(__name__)
 app.debug = True
 
-# Configs
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
-# Modules
-db = SQLAlchemy(app)
-
-# Constants
-TODO_TITLE_MAX_LENGTH = 50
-
-# Models
-# TODO Implement
-# class User(db.Model):
-#     __tablename__ = 'users'
-
-
-class Todo(db.Model):
-    __tablename__ = 'todos'
-    
-    uuid = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    
-    title = db.Column(db.String(TODO_TITLE_MAX_LENGTH), nullable=False)
-    info = db.Column(db.Text)
-    
-    is_complete = db.Column(db.Boolean, nullable=False, default=False)
-    creation_date_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow())
-    
-    def __repr__(self):
-        return '<Todo %r>' % self.title
-
-# TODO Implement
-# class Event(db.Model):
-#     __tablename__ = 'events'
-
-
-# Schema Objects
-class TodoObject(SQLAlchemyObjectType):
-    class Meta:
-        model = Todo
-        interfaces = (graphene.relay.Node, )
-
-class Query(graphene.ObjectType):
-    node = graphene.relay.Node.Field()
-    all_todos = SQLAlchemyConnectionField(TodoObject)
-
-
-class CreateTodo(graphene.Mutation):
-    class Arguments:
-        title = graphene.String(required=True)
-        description = graphene.String(required=False)
-    
-    todo = graphene.Field(lambda: TodoObject)
-    
-    def mutate(self, info, title, description=None):
-        todo = Todo(title=title, info=description)        
-        db.session.add(todo)
-        db.session.commit()
-        return CreateTodo(todo=todo)
-
-
-class DeleteTodo(graphene.Mutation):
-    class Arguments:
-        id = graphene.ID(required=True)
-    
-    todo = graphene.Field(lambda: TodoObject) # NOTE Why this Line?
-
-    def mutate(self, info, id):
-        todo = Todo.query.get(id)
-
-        if todo is not None:
-            db.session.delete(todo)
-            db.session.commit()
-        
-        return todo
-
-
-class ToggleTodo(graphene.Mutation):
-    class Arguments:
-        id = graphene.ID(required=True)
-    
-    todo = graphene.Field(lambda: TodoObject)
-
-    def mutate(self, info, id):
-        todo = Todo.query.get(id)
-        
-        if todo is not None:
-            todo.is_complete = not todo.is_complete
-            db.session.commit()
-
-        return todo
-
-
-class Mutation(graphene.ObjectType):
-    create_todo = CreateTodo.Field()
-    delete_todo = DeleteTodo.Field()
-    toggle_todo = ToggleTodo.Field()
-    # TODO consider making an edit_todo mutation
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
-
-# Routes
-# TODO refactor this
 app.add_url_rule(
     '/graphql',
     view_func=GraphQLView.as_view(
         'graphql',
         schema=schema,
-        graphiql=True
+        graphiql=True,
+        get_context=lambda : {db_key: db_session}
     )
 )
 
@@ -133,6 +27,52 @@ app.add_url_rule(
 def index():
     return '<p> Hello World</p>'
 
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
 
 if __name__ == '__main__':
-     app.run(host="0.0.0.0")
+     app.run(host="0.0.0.0", debug=True, threaded=True)
+
+'''
+~~~ NOTE: Database
+TODO
+[] Learn to configure database with the create_engine() keyword arguments.
+[] Learn to add documentation to your tables with the Column() keyword argments.
+[X] Find the best session type for your application.
+[] Learn to work with the declarative_base().
+
+Resolve __init__.py & base.py. Then remove base.py
+
+QUESTIONS
+Where should I have the session declared?
+
+~~~ NOTE: API
+TODO
+[] Have tight control over api behavour:
+- [] implement error throws, and fail states
+- [] have tight control over api behavior w/ GQL typing (not null)
+
+optimize your resolvers with a look through the Query API.
+Compare the Query delete() and the Session delete()
+- https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.delete
+
+- determine your primary container for the API Objects:
+The Database Model or the Schema
+
+- look into how to use the Field() class.
+
+- Why does the delete_todos mutation work?
+
+
+TODO Create seperate mechanisms for permanent and temporary deletion.
+
+TODO Implement good logging, and create a debugging state for your project.
+~~~ NOTE: Setup
+inorder for the db to be properly created the Models must be imported first
+
+'''
+'''NOTE: Challenges
+Can I build a whole database in 10 mins(realistic timebased on my keystrokes per min.)?
+'''
