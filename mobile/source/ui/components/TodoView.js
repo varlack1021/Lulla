@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     },
     todoTitleText: {
         color: "#000000",
-        fontSize: 16
+        fontSize: 20
     },
     todoDueDateText: {
         color: "#A2A2A2",
