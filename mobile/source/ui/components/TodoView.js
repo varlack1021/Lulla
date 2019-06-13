@@ -47,12 +47,6 @@ export default class TodoView extends Component {
         let checkBoxShortPressAction;
         let checkBoxLongPressAction;
         let TodoText;
-        // TodoText = () => { return (
-        //     <View>
-        //         <Text style={styles.todoTitleText}>Todo Title</Text>
-        //     </View>
-        // )};
-        // console.error(this.props.dueDate);
         
 
         if(this.state.deletable) {

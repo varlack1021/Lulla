@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Text, TouchableHighlight ,StyleSheet, Alert } from "react-native";
+import { Navigation } from "react-native-navigation";
+
+import SignitureScreen from "../../SignitureScreen.js";
 
 export default class FooterView extends Component {
     constructor(props) {
@@ -8,7 +11,11 @@ export default class FooterView extends Component {
     }
 
     _onClick(event) {
-        Alert.alert("You'll be taken to my signature page!")
+        Navigation.push(this.props.componentId, {
+            component: {
+                name: "SigniturePage"
+            }
+        })
     }
 
     render() {
