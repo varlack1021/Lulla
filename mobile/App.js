@@ -7,11 +7,14 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, View, FlatList} from 'react-native';
+import {Platform, StyleSheet, View, FlatList, Alert} from 'react-native';
+import { Navigation } from "react-native-navigation";
 import TodoView from "./source/ui/components/TodoView.js";
 import HeaderView from "./source/ui/components/HeaderView.js";
 import FooterView from "./source/ui/components/FooterView";
 import ExtendedFloatingActionButton from "./source/ui/components/ExtendedFloatingActionButton.js";
+import { getTasks, saveTasks } from "./source/cache/functions";
+
 
 let testdata = {
   "data": {
@@ -220,25 +223,74 @@ let testdata = {
   }
 }
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-type Props = {};
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-export default class App extends Component<Props> {
+    this.state = {
+      tasks : [],
+      delete: [],
+      changed: []
+    };
+    
+    this.startAddingATodo = this.startAddingATodo.bind(this);
+  }
+
+  componentWillMount() {
+    getTasks().then((gottenTask) => {
+      this.setState({
+        tasks: gottenTask
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.navigationEventListener = Navigation.events().bindComponent(this);
+    Alert.alert(JSON.stringify(this.state.tasks))
+
+  }
+
+  componentDidDisappear() {
+    saveTasks(this.state.tasks);
+  }
+
+  startAddingATodo() {
+    Navigation.push(this.props.componentId, {
+      topTabs: {
+          children:[
+              {
+                  component: {
+                      name: "TodoAdditionPage"
+                  }
+              },
+              {
+                  component: {
+                      name: "WhenPage"
+                  }
+              },
+              {
+                  component: {
+                      name: "DescriptionPage",
+                  }
+              }
+          ]
+      }
+  });
+
+  }
+
+
   render() {
     return (
       <View style={styles.app}>
         <View style={styles.listContainer}>
+          {/* <HeaderView text="Your Todos"/> */}
           <FlatList
               ListHeaderComponent={<HeaderView text="Your Todos"/>}
               stickyHeaderIndices={[0]} //what the analogy behind this??
               
-              data={testdata.data.getTodos}
+              data={this.state.tasks}
               keyExtractor={(item, index)=>{return item.id}}
               renderItem={({item, index, separators})=>(
                 <TodoView title={item.title} dueDate={item.dateCreated} />
@@ -251,7 +303,7 @@ export default class App extends Component<Props> {
               }/>
         </View>
         <View style={{position:'absolute', right: 16, bottom: 16}}>
-          <ExtendedFloatingActionButton text="add todo" componentId={this.props.componentId}/>
+          <ExtendedFloatingActionButton text="add todo" action={this.startAddingATodo}/>
         </View>
       </View>
     );
@@ -270,11 +322,14 @@ const styles = StyleSheet.create({
 });
 /**
  * Learn to use flow, buck, and babel
+ * Abstract out color, and color associations in the app to allow for easy across
  * 
  * ~~~Todo Component
  * Refactor this component to make its code more elegant: use the various APIs (Stylesheet, touchables, Platform), and Pro Design Patterns
  * Fix the header spacing
- * 
+ * - Make the whole component touchable.
+ * - Fix the touch feature to use onPressIn and offPressOut to handle short and long presses.
+ *
  * ~~~Navigation Feature
  * How should we organize our code base to handle sending of the ability to navigate thourghout the app.
  * Can we design the software to be navigation framework agnositic. technological agnosticism
@@ -282,5 +337,11 @@ const styles = StyleSheet.create({
  * ~~~Extended FAB Component
  * I don't know how to fully evaulate the effects of flex box statements.
  * - Add shadowing and basic animation to the FAB
+ * 
+ * ~~~Cancel Button
+ * Make a unique font.
+ * Make a the image a font
+ * Add Animatation to the text
+ * 
  * 
  */

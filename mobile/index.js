@@ -3,6 +3,7 @@
  */
 
 import App from './App';
+import SplashScreen from "./source/ui/screens/SplashScreen.js";
 import SignitureScreen from "./source/SignitureScreen.js";
 import TodoAdditionScreen from "./source/TodoAdditionScreen";
 import WhenTab from "./source/WhenTab.js";
@@ -15,6 +16,9 @@ Navigation.registerComponent(`SigniturePage`, () => SignitureScreen);
 Navigation.registerComponent(`TodoAdditionPage`, () => TodoAdditionScreen);
 Navigation.registerComponent(`DescriptionPage`, () => DescriptionTab);
 Navigation.registerComponent(`WhenPage`, () => WhenTab);
+
+
+Navigation.registerComponent('SplashScreen', () => SplashScreen)
 
 Navigation.events().registerAppLaunchedListener(()=> {
     Navigation.setRoot({
@@ -39,7 +43,7 @@ Navigation.events().registerAppLaunchedListener(()=> {
                 children : [
                     {
                         component: {
-                            name: 'MainPage'
+                            name: 'SplashScreen'
                         }
                     }
                 ],

@@ -1,4 +1,4 @@
-# Lula
+# Lulla
 
 A productivity app dedicated to helping young people create the they want by managing the one reasource we all have in equal measure, time.
 

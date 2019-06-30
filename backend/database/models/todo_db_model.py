@@ -1,5 +1,6 @@
 from .. import Base
 from sqlalchemy import Column, ForeignKey, Integer, DateTime, Boolean, String
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from ..constants import todo_completed_description, todo_date_completed_description, todo_description_description, todo_due_date_description, todo_id_description, todo_parent_id_description, todo_title_description, todo_date_created_description
 
@@ -46,5 +47,14 @@ class TodoDBModel(Base):
     due_date = Column('due_date', DateTime, doc=todo_due_date_description)
     parent_id = Column('parent_id', Integer, ForeignKey('todos.id'), doc=todo_parent_id_description)
 
+    children = relationship("TodoDBModel", remote_side=[id])
+
     def __repr__(self):
         return "<Todo(id={0}, title={1}, completion_status={2}, ...)>".format(self.id, self.title, self.completed)
+
+
+# class Test(Base):
+
+#     __tablename__ = "test"
+#     title = Column('title', String, nullable=False)
+

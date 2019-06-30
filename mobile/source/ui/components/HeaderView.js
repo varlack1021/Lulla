@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 48,
         color: "#000000",
-        textDecorationLine: "underline",
         backgroundColor: "#FFFFFF"
-        //marginBottom: 
     }
 });

@@ -8,9 +8,9 @@ export default class SignitureScreen extends Component {
 
     render() {
         return(
-            <View style={{flex:1, backgroundColor:"red", justifyContent:"center", alignItems:"center"}}>
-                <Text style={{fontSize:20, color:"white"}}>
-                    Signiture Screen
+            <View style={{flex:1, backgroundColor:"white", justifyContent:"center", alignItems:"center"}}>
+                <Text style={{fontSize:25, color:"purple"}}>
+                    Dreamy Jy🕺🏿 and the crew
                 </Text>
             </View>
         );
