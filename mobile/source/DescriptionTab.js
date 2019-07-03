@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image, TextInput, TouchableWithoutFeedback } from "react-native";
 import { Navigation } from "react-native-navigation";
-import ExtendedFloatingActionButton from "./ui/components/ExtendedFloatingActionButton";
+import ExtendedFloatingActionButton from "./shared_ui/components/ExtendedFloatingActionButton";
 
 export default class DescriptionTab extends Component {
     constructor(props) {

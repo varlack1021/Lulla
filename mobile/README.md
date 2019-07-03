@@ -1,8 +1,10 @@
 # Mobile Frontend
 
-The hybrid mobile app for the Lula app.
+The hybrid mobile app for the Lulla app.
 
 User Flows:
+
+Fair warning the support functions are probabily a hot bed for bugs.
 
 ---
 # Android Developement

@@ -9,10 +9,10 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, View, FlatList, Alert} from 'react-native';
 import { Navigation } from "react-native-navigation";
-import TodoView from "./source/ui/components/TodoView.js";
-import HeaderView from "./source/ui/components/HeaderView.js";
-import FooterView from "./source/ui/components/FooterView";
-import ExtendedFloatingActionButton from "./source/ui/components/ExtendedFloatingActionButton.js";
+import TodoView from "./source/shared_ui/components/TodoView.js";
+import HeaderView from "./source/shared_ui/components/HeaderView.js";
+import FooterView from "./source/shared_ui/components/FooterView";
+// import FloatingActionButton from "./source/shared_ui/components/FloatingActionButton.js";
 import { getTasks, saveTasks } from "./source/cache/functions";
 
 
@@ -303,7 +303,7 @@ export default class App extends Component {
               }/>
         </View>
         <View style={{position:'absolute', right: 16, bottom: 16}}>
-          <ExtendedFloatingActionButton text="add todo" action={this.startAddingATodo}/>
+          {/* <ExtendedFloatingActionButton text="add todo" action={this.startAddingATodo}/> */}
         </View>
       </View>
     );

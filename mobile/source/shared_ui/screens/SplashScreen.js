@@ -13,7 +13,7 @@ export default class SplashScreen extends Component {
 
     componentDidMount() {
         Animated.timing(this.backgroundColor, {
-            toValue: 150,
+            toValue: 100,
             duration: 1000
         }).start();
     }
