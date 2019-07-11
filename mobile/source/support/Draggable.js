@@ -148,15 +148,15 @@ export default class Draggable extends Component {
                             <View style={{flexDirection: "row", alignItems: "center"}}>
                                 <View style={{width: 30, height: 30, borderWidth: 4, borderColor: primaryColor, borderRadius: 15, marginRight: 20}} />
                                 <View style={{flexDirection:"column"}}>
-                                    <Text style={{fontWeight: "200", fontSize: 26, color: primaryFontColor}}>Task Title</Text>
-                                    <Text style={{fontWeight: "600", fontSize: 16, color: secondaryFontColor}}>Task Due Date</Text>  
+                                    <Text style={{fontSize: 26, color: primaryFontColor, fontFamily: "Raleway-Regular"}}>Task Title</Text>
+                                    <Text style={{fontSize: 16, color: secondaryFontColor, fontFamily: "Raleway-ExtraBoldItalic"}}>Task Due Date</Text>  
                                 </View>
                             </View>
 
                             <View style={{flexDirection:"column", marginRight: 10}}>
-                                <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>3</Text>
+                                <Text style={{fontSize: 18, color: secondaryFontColor, fontFamily: "Raleway-ExtraBoldItalic"}}>3</Text>
                                 <View style={{height: 4, backgroundColor: "#9A9A9A"}}/>
-                                <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>9</Text>
+                                <Text style={{fontSize: 18, color: secondaryFontColor, fontFamily: "Raleway-ExtraBoldItalic"}}>9</Text>
                             </View>
 
                         </View>

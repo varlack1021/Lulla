@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     },
     logoText: {
         fontSize: 160,
-        color: "white"
+        color: "white",
+        fontFamily: "Lobster1.3"
     }
 });
