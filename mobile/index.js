@@ -19,7 +19,7 @@ Navigation.events().registerAppLaunchedListener(()=> {
                 children : [
                     {
                         component: {
-                            name: "SplashScreen"
+                            name: "PlayGroundScreen"
                         }
                     }
                 ],
