@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, TouchableWithoutFeedback, Animated, PanResponder, StyleSheet, Alert } from "react-native";
+import { View, TouchableWithoutFeedback, Text, Animated, PanResponder, StyleSheet, Alert } from "react-native";
+import { appMainBackgroundColor, primaryFontColor, secondaryFontColor, primaryColor } from "../constants/colors";
 
 export default class Draggable extends Component {
     constructor(props) {
@@ -142,7 +143,24 @@ export default class Draggable extends Component {
         return(
             <TouchableWithoutFeedback onPress={() => {Alert.alert("Do you Boo!")}} disabled={true}>
                 <Animated.View style={[{backgroundColor: colorSpectrum}]}>
-                    <Animated.View {...this._panResponder.panHandlers} style={[styles.dragMe, imageStyle]} />
+                    <Animated.View {...this._panResponder.panHandlers} style={[styles.dragMe, imageStyle]}>
+                        <View style={{backgroundColor: appMainBackgroundColor, flexDirection: "row", alignItems: "center", justifyContent:"space-between"}}>
+                            <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <View style={{width: 30, height: 30, borderWidth: 4, borderColor: primaryColor, borderRadius: 15, marginRight: 20}} />
+                                <View style={{flexDirection:"column"}}>
+                                    <Text style={{fontWeight: "200", fontSize: 26, color: primaryFontColor}}>Task Title</Text>
+                                    <Text style={{fontWeight: "600", fontSize: 16, color: secondaryFontColor}}>Task Due Date</Text>  
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection:"column", marginRight: 10}}>
+                                <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>3</Text>
+                                <View style={{height: 4, backgroundColor: "#9A9A9A"}}/>
+                                <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>9</Text>
+                            </View>
+
+                        </View>
+                    </Animated.View>
                 </Animated.View>
             </TouchableWithoutFeedback>
         );
@@ -152,9 +170,9 @@ export default class Draggable extends Component {
 
 const styles = StyleSheet.create({
     dragMe: {
-        height: 100,
-        backgroundColor: "white",
-        borderColor: "black",
-        borderWidth: 2
+        backgroundColor: appMainBackgroundColor,
+        borderBottomColor: "#BFBFBF",
+        borderBottomWidth: .7,
+        paddingBottom: 16
     }
 });

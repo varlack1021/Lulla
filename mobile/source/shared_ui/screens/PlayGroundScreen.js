@@ -4,6 +4,7 @@ import FloatingActionButton from "../components/FloatingActionButton.js";
 import Task from "../../tasks_management/Task.js";
 import Draggable from "../../support/Draggable.js";
 import TaskList from "../../tasks_management/TaskList.js";
+import { appMainBackgroundColor, primaryFontColor, secondaryFontColor, primaryColor } from "../../constants/colors.js";
 
 
 export default class PlayGroundScreen extends Component {
@@ -20,30 +21,34 @@ export default class PlayGroundScreen extends Component {
             "children": []
         }]
 
+        //green wood prject
+
         return(
             <View style={styles.playPen}>
-                <View>
-                    <View style={{flexDirection: "row", alignItems: "center", backgroundColor: "blue"}}>
+                <Draggable />
 
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={{fontWeight: "200", fontSize: 26, color: "#000000"}}>Task Title</Text>
-                            <Text style={{fontWeight: "600", fontSize: 16, color: "#9A9A9A"}}>Task Due Date</Text>  
+                <View style={{backgroundColor: appMainBackgroundColor}}>
+                    <View style={{backgroundColor: appMainBackgroundColor, flexDirection: "row", alignItems: "center", justifyContent:"space-between"}}>
+                        <View style={{flexDirection: "row", alignItems: "center"}}>
+                            <View style={{width: 30, height: 30, borderWidth: 4, borderColor: primaryColor, borderRadius: 15, marginRight: 20}} />
+                            <View style={{flexDirection:"column"}}>
+                                <Text style={{fontWeight: "200", fontSize: 26, color: primaryFontColor}}>Task Title</Text>
+                                <Text style={{fontWeight: "600", fontSize: 16, color: secondaryFontColor}}>Task Due Date</Text>  
+                            </View>
                         </View>
 
-                        <View style={{flexDirection:"column", right: 10}}>
-                            <Text style={{fontWeight: "900", fontSize: 16, color: "#9A9A9A"}}>3</Text>
+                        <View style={{flexDirection:"column", marginRight: 10}}>
+                            <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>3</Text>
                             <View style={{height: 4, backgroundColor: "#9A9A9A"}}/>
-                            <Text style={{fontWeight: "900", fontSize: 16, color: "#9A9A9A"}}>9</Text>
+                            <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>9</Text>
                         </View>
 
                     </View>
-                    <View style={{backgroundColor: "red"}}/>
                 </View>
 
                 {/* <TaskList
                     tasks={data}
                     removed={[]} /> */}
-                {/* <Draggable /> */}
                 {/* <FlatList
                     data={[
                         {id: 1},
@@ -83,6 +88,7 @@ export default class PlayGroundScreen extends Component {
 
 const styles = StyleSheet.create({
     playPen: {
-        flex: 1
+        flex: 1,
+        backgroundColor: appMainBackgroundColor
     }
 });
