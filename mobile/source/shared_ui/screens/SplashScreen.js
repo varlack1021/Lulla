@@ -37,7 +37,6 @@ export default class SplashScreen extends Component {
 const styles = StyleSheet.create({
     splashScreenContainer: {
         flex: 1,
-        backgroundColor: "rgba(45,119,234,1)",
         justifyContent: "center",
         alignItems:"center",
     },

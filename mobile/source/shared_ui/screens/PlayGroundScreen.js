@@ -2,83 +2,451 @@ import React, { Component } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import FloatingActionButton from "../components/FloatingActionButton.js";
 import Task from "../../tasks_management/Task.js";
-import Draggable from "../../support/Draggable.js";
 import TaskList from "../../tasks_management/TaskList.js";
 import { appMainBackgroundColor, primaryFontColor, secondaryFontColor, primaryColor } from "../../constants/colors.js";
+import ToolTile from "../components/ToolTile.js";
 
 
 export default class PlayGroundScreen extends Component {
     render() {
-        const data = [{
+        const data = [
+        {
             "id": "3",
             "title": "Complete employment forms",
             "description": null,
             "dateCreated": "2019-05-20T07:36:13.842880",
             "completed": false,
             "dateCompleted": null,
-            "dueDate": null,
+            "dueDate": "2019-07-09T22:05:24",
             "parentId": null,
-            "children": []
-        }]
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        }, 
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        }, 
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Complete employment forms",
+            "description": null,
+            "dateCreated": "2019-05-20T07:36:13.842880",
+            "completed": false,
+            "dateCompleted": null,
+            "dueDate": "2019-07-09T22:05:24",
+            "parentId": null,
+            "children": [
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": false},
+                {"completed": true},
+                {"completed": true},
+                {"completed": true},
+            ]
+        }
+    ]
 
         //green wood prject
-
+        const datum = [
+            {
+                "id": "3",
+                "title": "Complete employment forms",
+                "description": null,
+                "dateCreated": "2019-05-20T07:36:13.842880",
+                "completed": false,
+                "dateCompleted": null,
+                "dueDate": "2019-07-09T22:05:24",
+                "parentId": null,
+                "children": [
+                    {"completed": true},
+                    {"completed": false},
+                    {"completed": true},
+                    {"completed": false},
+                    {"completed": true},
+                    {"completed": true},
+                    {"completed": true},
+                ]
+            },
+            {
+                "id": "4",
+                "title": "Complete employment forms",
+                "description": null,
+                "dateCreated": "2019-05-20T07:36:13.842880",
+                "completed": false,
+                "dateCompleted": null,
+                "dueDate": "2019-07-09T22:05:24",
+                "parentId": null,
+                "children": [
+                    {"completed": true},
+                    {"completed": false},
+                    {"completed": true},
+                    {"completed": false},
+                    {"completed": true},
+                    {"completed": true},
+                    {"completed": true},
+                ]
+            }
+        ]
         return(
             <View style={styles.playPen}>
-                <Draggable />
-
-                <View style={{backgroundColor: appMainBackgroundColor}}>
-                    <View style={{backgroundColor: appMainBackgroundColor, flexDirection: "row", alignItems: "center", justifyContent:"space-between"}}>
-                        <View style={{flexDirection: "row", alignItems: "center"}}>
-                            <View style={{width: 30, height: 30, borderWidth: 4, borderColor: primaryColor, borderRadius: 15, marginRight: 20}} />
-                            <View style={{flexDirection:"column"}}>
-                                <Text style={{fontWeight: "200", fontSize: 26, color: primaryFontColor}}>Task Title</Text>
-                                <Text style={{fontWeight: "600", fontSize: 16, color: secondaryFontColor}}>Task Due Date</Text>  
-                            </View>
-                        </View>
-
-                        <View style={{flexDirection:"column", marginRight: 10}}>
-                            <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>3</Text>
-                            <View style={{height: 4, backgroundColor: "#9A9A9A"}}/>
-                            <Text style={{fontWeight: "900", fontSize: 18, color: secondaryFontColor}}>9</Text>
-                        </View>
-
-                    </View>
-                </View>
-
+                <ToolTile 
+                    text='Tool Title'
+                    color={primaryColor}
+                    empty={true}
+                />
                 {/* <TaskList
                     tasks={data}
                     removed={[]} /> */}
-                {/* <FlatList
-                    data={[
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1},
-                        {id: 1}
-                    ]}
-                    renderItem={({item, index, separators})=>(<Draggable />)}
-                    scrollEnabled={true}
-                /> */}
-
                 <FloatingActionButton
                     action={()=>{ }}
                     text="Hello World" 
-                    backgroundColor="#2D77EA" 
+                    backgroundColor={primaryColor} 
                     contentColor="#FFFFFF"
                     positioning={{position: "absolute", right: 16, bottom: 16}} /> 
             </View>

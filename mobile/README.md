@@ -2,6 +2,12 @@
 
 The hybrid mobile app for the Lulla app.
 
+## Standards
+
+Strings use single quotes
+Colors are represented with hex
+
+
 User Flows:
 
 Fair warning the support functions are probabily a hot bed for bugs.

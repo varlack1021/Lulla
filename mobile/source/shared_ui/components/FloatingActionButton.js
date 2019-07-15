@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, TouchableWithoutFeedback, Animated, Platform, StyleSheet } from 'react-native';
 
 import { shadeColor } from "../../support/aesthetic.js";
+import { FABTextFontFamily, FABTextFontSize } from '../../constants/type.js';
 /**
  * This is a general purpose floating action button(FAB) component. It support styling for regular, mini, and extended FAB (with and without an icon).
  * 
@@ -29,7 +30,7 @@ export default class FloatingActionButton extends Component {
 
     _onPressedIn() {
         Animated.timing(this.state.backgroundColorAnimator, {
-            toValue: 5,
+            toValue: 1,
             duration: 62.5
         }).start();
     }
@@ -63,8 +64,8 @@ export default class FloatingActionButton extends Component {
 
 
         const backgroundColorSpectrum = this.state.backgroundColorAnimator.interpolate({
-            inputRange: [0,5],
-            outputRange: [this.props.backgroundColor, shadeColor(.2, this.props.backgroundColor)]
+            inputRange: [0,1],
+            outputRange: [this.props.backgroundColor, shadeColor(.4, this.props.backgroundColor)]
         });
 
         const ButtonWrapper = (props) => {
@@ -100,7 +101,7 @@ export default class FloatingActionButton extends Component {
 
             return (
                 <ButtonWrapper buttonStyle={dynamicContianerStyle} positioningStyles={this.props.positioning}>
-                    <Text style={[styles.buttonText, dynamicTextStyle]}>{this.props.text.toUpperCase()}</Text>
+                    <Text style={[styles.buttonText, dynamicTextStyle]}>{this.props.text}</Text>
                 </ButtonWrapper>
             );
         } else if ( this.props.text == null && this.props.image != null ) {
@@ -136,8 +137,8 @@ const styles = StyleSheet.create({
         })
     },
     buttonText: {
-        fontSize: 14,
-        fontWeight: "600"
+        fontSize: FABTextFontSize,
+        fontFamily: FABTextFontFamily
     }
 });
 

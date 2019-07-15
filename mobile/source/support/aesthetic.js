@@ -13,9 +13,9 @@
  * Taken from: https://github.com/PimpTrizkit/PJs/blob/master/pSBC.js
  * Explained At: https://github.com/PimpTrizkit/PJs/wiki/12.-Shade,-Blend-and-Convert-a-Web-Color-(pSBC.js)#stackoverflow-archive-begin
  * 
- * @param {*} p
- * @param {*} c0 
- * @param {*} c1 
+ * @param {Number} p
+ * @param {String} c0 
+ * @param {String} c1 
  * @param {*} l 
  */
 const pSBC=(p,c0,c1,l)=> {
@@ -49,6 +49,58 @@ const pSBC=(p,c0,c1,l)=> {
  * @param {Number} percent - the percentage by which a color is darken or lightened. A float on the interval of [0,1]. Positive values lighten, and negative values darken.
  * @param {String} color - the color to be manipulated. A string in HEX or RGB(A) format.
  */
-export const shadeColor = (percent, color) => {
+export function shadeColor(percent, color) {
     return pSBC(percent, color);
 }
+
+export function transitionColorTo(percent, fromColor, toColor) {
+    return pSBC(percent, fromColor, toColor);
+}
+
+/**
+ * Truncates a string down to a specified length, if it needs to be. If the string gets truncated '...' is appended to the end of it.
+ * 
+ * @param {String} text 
+ * @param {Number} charLimit 
+ */
+export function truncateIfNeedBe(text, charLimit) {
+	if(text.length > charLimit) {
+		return text.substring(0, charLimit) + '...';
+	}
+	return text;
+}
+
+/**
+ * 
+ * @param {String} datetime 
+ * @param {String} format 
+ */
+export function extractDate(datetime, outputFormat='mm-dd-yyy') {
+	let dateFragments = datetime.substring(0,10).split('-');
+	return dateFragments[1]+'/'+dateFragments[2]+'/'+dateFragments[0];
+}
+
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+/**
+ * 
+ * @param {String} now 
+ * @param {String} then 
+ */
+export function daysBetween(now, then) {
+	dt_now = new Date(now);
+	
+	dt_then = new Date(then);
+
+	utc_now = Date.UTC(dt_now.getFullYear(), dt_now.getMonth(), dt_now.getDate());
+	utc_then = Date.UTC(dt_then.getFullYear(), dt_then.getMonth(), dt_then.getDate());
+
+	return (utc_then-utc_now)/_MS_PER_DAY;
+}
+
+/**
+ * date state
+ * cloose to due date
+ * 
+ * never forget the new term on a constructor
+ */

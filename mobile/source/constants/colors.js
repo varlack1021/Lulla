@@ -1,5 +1,6 @@
 
 
+
 export const appMainBackgroundColor = "#FFFFFF";
 export const primaryColor = "#2D77EA";
 export const secondaryColor = "#4DA835";
