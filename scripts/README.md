@@ -12,3 +12,5 @@ Component API Generator:
 
 Debugging Clean-up script
 - removes all logs
+
+Code base cleans move variables to their appoarate location
