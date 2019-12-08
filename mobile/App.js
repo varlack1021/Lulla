@@ -6,283 +6,109 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, View, FlatList} from 'react-native';
-import TodoView from "./source/ui/components/TodoView.js";
-import HeaderView from "./source/ui/components/HeaderView.js";
-import FooterView from "./source/ui/components/FooterView";
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
 
-let testdata = {
-  "data": {
-    "getTodos": [
-      {
-        "id": "3",
-        "title": "Complete employment forms",
-        "description": null,
-        "dateCreated": "2019-05-20T07:36:13.842880",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "4",
-        "title": "New title",
-        "description": null,
-        "dateCreated": "2019-05-21T19:43:29.249388",
-        "completed": true,
-        "dateCompleted": "2019-05-26T03:40:50.254061",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "5",
-        "title": "Jack Black is Wack",
-        "description": null,
-        "dateCreated": "2019-05-21T19:44:37.636182",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:44:37.636197",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "6",
-        "title": "Do my homework.",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T19:57:27.333206",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "7",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T19:57:27.334612",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:57:27.334622",
-        "dueDate": "2019-05-21T19:56:44",
-        "parentId": null
-      },
-      {
-        "id": "8",
-        "title": "Do my homework.",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T19:57:49.757189",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "9",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T19:57:49.757769",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:57:49.757780",
-        "dueDate": "2019-05-21T20:01:16.079090",
-        "parentId": null
-      },
-      {
-        "id": "10",
-        "title": "find a girl friend",
-        "description": null,
-        "dateCreated": "2019-05-21T20:01:14.849684",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "13",
-        "title": "New Title",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T20:02:45.188774",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": "2019-05-21T20:02:35.342864",
-        "parentId": null
-      },
-      {
-        "id": "14",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T20:02:45.189563",
-        "completed": true,
-        "dateCompleted": "2019-05-21T20:02:45.189574",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "15",
-        "title": "make a todo",
-        "description": null,
-        "dateCreated": "2019-05-26T03:38:59.428468",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "33",
-        "title": "Complete employment forms",
-        "description": null,
-        "dateCreated": "2019-05-20T07:36:13.842880",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "34",
-        "title": "New title",
-        "description": null,
-        "dateCreated": "2019-05-21T19:43:29.249388",
-        "completed": true,
-        "dateCompleted": "2019-05-26T03:40:50.254061",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "35",
-        "title": "Jack Black is Wack",
-        "description": null,
-        "dateCreated": "2019-05-21T19:44:37.636182",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:44:37.636197",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "36",
-        "title": "Do my homework.",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T19:57:27.333206",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "37",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T19:57:27.334612",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:57:27.334622",
-        "dueDate": "2019-05-21T19:56:44",
-        "parentId": null
-      },
-      {
-        "id": "38",
-        "title": "Do my homework.",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T19:57:49.757189",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "39",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T19:57:49.757769",
-        "completed": true,
-        "dateCompleted": "2019-05-21T19:57:49.757780",
-        "dueDate": "2019-05-21T20:01:16.079090",
-        "parentId": null
-      },
-      {
-        "id": "310",
-        "title": "find a girl friend",
-        "description": null,
-        "dateCreated": "2019-05-21T20:01:14.849684",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "313",
-        "title": "New Title",
-        "description": "Get your homework finished jordane!",
-        "dateCreated": "2019-05-21T20:02:45.188774",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": "2019-05-21T20:02:35.342864",
-        "parentId": null
-      },
-      {
-        "id": "314",
-        "title": "write an app.",
-        "description": null,
-        "dateCreated": "2019-05-21T20:02:45.189563",
-        "completed": true,
-        "dateCompleted": "2019-05-21T20:02:45.189574",
-        "dueDate": null,
-        "parentId": null
-      },
-      {
-        "id": "315",
-        "title": "make a todo",
-        "description": null,
-        "dateCreated": "2019-05-26T03:38:59.428468",
-        "completed": false,
-        "dateCompleted": null,
-        "dueDate": null,
-        "parentId": null
-      }
-    ]
-  }
-}
+import {
+  Header,
+  LearnMoreLinks,
+  Colors,
+  DebugInstructions,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.app}>
-        <View style={styles.listContainer}>
-          <FlatList
-              ListHeaderComponent={<HeaderView text="Your Todos"/>}
-              stickyHeaderIndices={[0]} //what the analogy behind this??
-              
-              data={testdata.data.getTodos}
-              keyExtractor={(item, index)=>{return item.id}}
-              renderItem={({item, index, separators})=>(
-                <TodoView title={item.title} dueDate={item.dateCreated} />
-              )}
-              
-              ListFooterComponent={<FooterView text="Guess who made me?"/>}/>
-        </View>
-      </View>
-    );
-  }
-}
+const App: () => React$Node = () => {
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}>
+          <Header />
+          {global.HermesInternal == null ? null : (
+            <View style={styles.engine}>
+              <Text style={styles.footer}>Engine: Hermes</Text>
+            </View>
+          )}
+          <View style={styles.body}>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Step One</Text>
+              <Text style={styles.sectionDescription}>
+                Edit <Text style={styles.highlight}>App.js</Text> to change this
+                screen and then come back to see your edits.
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>See Your Changes</Text>
+              <Text style={styles.sectionDescription}>
+                <ReloadInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Debug</Text>
+              <Text style={styles.sectionDescription}>
+                <DebugInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Learn More</Text>
+              <Text style={styles.sectionDescription}>
+                Read the docs to discover what to do next:
+              </Text>
+            </View>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
-  app : {
-    backgroundColor: "#FFFFFF",
-    flex: 1
+  scrollView: {
+    backgroundColor: Colors.lighter,
   },
-  listContainer: {
-    paddingLeft: 16,
-    paddingTop: 16
-  }
+  engine: {
+    position: 'absolute',
+    right: 0,
+  },
+  body: {
+    backgroundColor: Colors.white,
+  },
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.black,
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+    color: Colors.dark,
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+  footer: {
+    color: Colors.dark,
+    fontSize: 12,
+    fontWeight: '600',
+    padding: 4,
+    paddingRight: 12,
+    textAlign: 'right',
+  },
 });
-/**
- * Learn to use flow, buck, and babel
- * 
- * ~~~Todo Component
- * Refactor this component to make its code more elegant: use the various APIs (Stylesheet, touchables, Platform), and Pro Design Patterns
- */
+
+export default App;

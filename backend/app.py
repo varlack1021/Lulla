@@ -75,4 +75,8 @@ inorder for the db to be properly created the Models must be imported first
 '''
 '''NOTE: Challenges
 Can I build a whole database in 10 mins(realistic timebased on my keystrokes per min.)?
+
+
+Your goal is to create a fuck and chill relationship you two fuck on the weekends.
+Yall should be having very sexual convos.
 '''
