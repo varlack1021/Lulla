@@ -34,3 +34,9 @@ yarn-error.log*
 /ios/Pods/
 
 Playground*/
+
+*.yml
+*.json
+*.pickle
+google_calendar_api.py
+bb_api.py
