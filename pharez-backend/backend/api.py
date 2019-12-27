@@ -38,7 +38,6 @@ def authenticate():
 	client_id = data['client_id']
 	scope = data['scope']
 	state = ''.join([random.choice(string.ascii_uppercase) for x in range(random.randrange(10, 20))])
-	#https://todoist.com/oauth/authorize?client_id=bd973b3f2c0f452d8bb8b5dc271b2115&scope=data:read&state=ABSECESEDS
 	redirectUri += "client_id={}&scope={}&state={}".format(client_id, scope, state)
 	
 	return redirect(redirectUri)
