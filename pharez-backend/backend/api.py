@@ -59,7 +59,6 @@ def Todoist():
 	code = request.args['code']
 
 	url = "{}client_id={}&client_secret={}&code={}".format(auth_uri, client_id, client_secret, code)
-	#url = "https://todoist.com/oauth/access_token?client_id=bd973b3f2c0f452d8bb8b5dc271b2115&client_secret=397847abcad1458b88e524db46c49ade&code={}".format(code)
 	
 	session = requests.Session()
 
