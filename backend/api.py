@@ -87,38 +87,7 @@ def Todoistcallback():
 #Determines when the application must reacquire consent 
 #Generates correct redirect URLS
 #Helps to implement redirect handlers that exchange authorization codes for access tokens
-@app.route('/google_auth', methods=['GET'])
-def authenticateGoogle():
 
-	flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-		'client_secret.json',
-		#this is the scope
-		['https://www.googleapis.com/auth/calendar.addons.execute'])
-
-	flow.redirect_uri = 'http://localhost:8080/google'
-
-	authorization_url, state = flow.authorization_url(
-		access_type = 'offline',
-		include_granted_scopes = 'true')
-
-	session['state'] = state
-	return redirect(authorization_url)
-
-@app.route('/google', methods=['GET'])
-def googleAPI():
-	state = session['state']
-	
-	flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-    'client_secret.json',
-    scopes=['https://www.googleapis.com/auth/calendar.addons.execute'],
-    state=state)
-	x = "https://localhost:8080/google?state=543tk6FXu7e1d7SBznQ7oOVHhIDIsq&code=4/uwGw0zdzBZkIl8XbZKIzrb7mCB6rqul6K33IKfWHwqvfekHklKM2y_EizdWL_14zh_jvyVBLDJKdRGD2irU6r6k&scope=https://www.googleapis.com/auth/calendar.addons.execute"
-	#flow.redirect_uri = url_for('http://localhost:5000/google', _external=False)
-	authorization_response = x
-	pprint(request.url)
-	flow.fetch_token(authorization_response=authorization_response)
-
-	return jsonify(flow.credentials)
 if __name__ == '__main__':
 
   app.run(debug=True, host='0.0.0.0', port=8080)
