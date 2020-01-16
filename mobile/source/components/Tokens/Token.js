@@ -1,0 +1,97 @@
+import React, {useRef} from "react";
+import { 
+    Text, 
+    TouchableWithoutFeedback, 
+    Image, 
+    StyleSheet, 
+    Animated, 
+    View
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import GradientView from "../native modules/GradientView";
+
+export default function Token({action, color, text, logoImage, iconName, iconColor}) {
+    const ScalableGradient = Animated.createAnimatedComponent(GradientView);
+    const componentScale = useRef(new Animated.Value(0)).current;
+    const componentScaleRange = componentScale.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 1.2]
+    });
+
+    return(
+        <TouchableWithoutFeedback
+            onPressIn={() => {
+                Animated.timing(componentScale, {
+                    toValue: 1,
+                    duration: 400
+                }).start();
+            }}
+            onPressOut={() => {
+                Animated.timing(componentScale, {
+                    toValue: 0,
+                    duration: 400
+                }).start();
+                action();
+            }}>
+            <ScalableGradient
+                style={[styles.container, {
+                    backgroundColor: color,
+                    transform: [
+                        {scale: componentScaleRange}
+                    ]
+                }]}>
+                <View style={[styles.subContainer]}>
+                    <Image 
+                        source={logoImage}
+                        style={[styles.logo]}/>
+                    <Text style={[styles.text]}>{text}</Text>
+                </View>
+                <Icon 
+                    name={iconName}
+                    size={24}
+                    color={iconColor}
+                    style={[styles.icon]}/>
+            </ScalableGradient>
+        </TouchableWithoutFeedback>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        width: 128,
+        height: 192,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: 16,
+        ...Platform.select({
+            ios:{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 3 },
+                shadowOpacity: 0.16,
+                shadowRadius: 16,
+            },
+            android: {
+                elevation: 6
+            }
+        })
+    },
+    subContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    logo: {
+        width: 48,
+        height: 48,
+        resizeMode: "contain",
+        marginTop: 16
+    },
+    text: {
+        color: '#000000',
+        fontSize: 24,
+        fontFamily: 'Raleway-Regular',
+        textAlign: 'center'
+    },
+    icon: {
+        marginBottom: 8
+    }
+});

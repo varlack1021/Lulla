@@ -36,7 +36,6 @@ target 'Lulla' do
 
   pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
   pod 'RNCAsyncStorage', :podspec => '../node_modules/@react-native-community/async-storage/RNCAsyncStorage.podspec'
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'LullaTests' do
     inherit! :search_paths
