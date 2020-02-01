@@ -5,7 +5,8 @@ import {
     TouchableWithoutFeedback,
     Image,
     StyleSheet,
-    Animated
+    Animated,
+    Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import colors from "../../config/colors";
@@ -25,57 +26,59 @@ export default function Link({action, iconName, iconColor, highlightColor, text,
     });
 
     return(
-        <TouchableWithoutFeedback 
-            onPressIn={() => {
-                Animated.parallel([
-                    Animated.timing(componentBackgroundColor, {
-                        toValue: 0,
-                        duration: 65.5
-                    }),
-                    Animated.timing(iconOpacity, {
-                        toValue: 0,
-                        duration: 65.5,
-                        useNativeDriver: true
-                    })
-                ]).start();
-            }}
-            onPressOut={() => {
-                Animated.parallel([
-                    Animated.timing(componentBackgroundColor, {
-                        toValue: 1,
-                        duration: 500
-                    }),
-                    Animated.timing(iconOpacity, {
-                        toValue: 1,
-                        duration: 500,
-                        useNativeDriver: true
-                    })
-                ]).start();
+        <View>
+            <TouchableWithoutFeedback 
+                onPressIn={() => {
+                    Animated.parallel([
+                        Animated.timing(componentBackgroundColor, {
+                            toValue: 0,
+                            duration: 65.5
+                        }),
+                        Animated.timing(iconOpacity, {
+                            toValue: 0,
+                            duration: 65.5,
+                            useNativeDriver: true
+                        })
+                    ]).start();
+                }}
+                onPressOut={() => {
+                    Animated.parallel([
+                        Animated.timing(componentBackgroundColor, {
+                            toValue: 1,
+                            duration: 500
+                        }),
+                        Animated.timing(iconOpacity, {
+                            toValue: 1,
+                            duration: 500,
+                            useNativeDriver: true
+                        })
+                    ]).start();
 
-                action();
-            }}>
-            <Animated.View 
-                style={[styles.container, {backgroundColor: componentBackgroundColorRange }]}>
-                <View style={[styles.subContainer]}>
-                    <Image
-                        source={imageURL} 
-                        style={[styles.logo]}/>
-                    <Text style={[styles.text]}>{text}</Text>
-                </View>
-                
-                <AnimatedIcon 
-                    name={iconName}
-                    size={24}
-                    color={iconColor}
-                    style={[styles.icon, {opacity: iconOpacityRange}]}/>
-            </Animated.View>
-        </TouchableWithoutFeedback>
+                    action();
+                }}>
+                <Animated.View 
+                    style={[styles.container, {backgroundColor: componentBackgroundColorRange }]}>
+                    <View style={[styles.subContainer]}>
+                        <Image
+                            source={imageURL} 
+                            style={[styles.logo]}/>
+                        <Text style={[styles.text]}>{text}</Text>
+                    </View>
+                    
+                    <AnimatedIcon 
+                        name={iconName}
+                        size={24}
+                        color={iconColor}
+                        style={[styles.icon, {opacity: iconOpacityRange}]}/>
+                </Animated.View>
+            </TouchableWithoutFeedback>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: Dimensions.get('window').width,
         paddingVertical: 16,
         flexDirection: 'row',
         alignItems: 'center',

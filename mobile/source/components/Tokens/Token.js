@@ -10,7 +10,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import GradientView from "../native modules/GradientView";
 
-export default function Token({action, color, text, logoImage, iconName, iconColor}) {
+export default function Token({action, color, text, logoImage, iconName, iconColor, style}) {
     const ScalableGradient = Animated.createAnimatedComponent(GradientView);
     const componentScale = useRef(new Animated.Value(0)).current;
     const componentScaleRange = componentScale.interpolate({
@@ -19,40 +19,42 @@ export default function Token({action, color, text, logoImage, iconName, iconCol
     });
 
     return(
-        <TouchableWithoutFeedback
-            onPressIn={() => {
-                Animated.timing(componentScale, {
-                    toValue: 1,
-                    duration: 400
-                }).start();
-            }}
-            onPressOut={() => {
-                Animated.timing(componentScale, {
-                    toValue: 0,
-                    duration: 400
-                }).start();
-                action();
-            }}>
-            <ScalableGradient
-                style={[styles.container, {
-                    backgroundColor: color,
-                    transform: [
-                        {scale: componentScaleRange}
-                    ]
-                }]}>
-                <View style={[styles.subContainer]}>
-                    <Image 
-                        source={logoImage}
-                        style={[styles.logo]}/>
-                    <Text style={[styles.text]}>{text}</Text>
-                </View>
-                <Icon 
-                    name={iconName}
-                    size={24}
-                    color={iconColor}
-                    style={[styles.icon]}/>
-            </ScalableGradient>
-        </TouchableWithoutFeedback>
+        <View style={[style]}>
+            <TouchableWithoutFeedback
+                onPressIn={() => {
+                    Animated.timing(componentScale, {
+                        toValue: 1,
+                        duration: 400
+                    }).start();
+                }}
+                onPressOut={() => {
+                    Animated.timing(componentScale, {
+                        toValue: 0,
+                        duration: 400
+                    }).start();
+                    action();
+                }}>
+                <ScalableGradient
+                    style={[styles.container, {
+                        backgroundColor: color,
+                        transform: [
+                            {scale: componentScaleRange}
+                        ]
+                    }]}>
+                    <View style={[styles.subContainer]}>
+                        <Image 
+                            source={logoImage}
+                            style={[styles.logo]}/>
+                        <Text style={[styles.text]}>{text}</Text>
+                    </View>
+                    <Icon 
+                        name={iconName}
+                        size={24}
+                        color={iconColor}
+                        style={[styles.icon]}/>
+                </ScalableGradient>
+            </TouchableWithoutFeedback>
+        </View>
     );
 }
 

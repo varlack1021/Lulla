@@ -18,6 +18,10 @@ configure(() => {
   require('../source/components/items/SignatureButton.stories');
   require('../source/components/Tokens/Token.stories');
   require('../source/components/items/RoundFlatActionButton.stories');
+  require('../source/components/headers/SingleFocusHeader.stories');
+  require('../source/components/headers/DualFocusHeader.stories');
+  require('../source/components/Links/LinkSet.stories');
+  require('../source/components/Tokens/TokenSet.stories');
 }, module);
 
 

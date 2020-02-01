@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  FlatList,
 } from 'react-native';
 
 import {
@@ -23,50 +24,89 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Chip from './source/components/Chips/Chip';
+
+
+const data = [
+  {
+    label: 'Main'
+  },
+  {
+    label: 'Side Calendar'
+  },
+  {
+    label: 'Home Work'
+  },
+  {
+    label: 'Jax'
+  },
+  {
+    label: 'Tests'
+  }
+];
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+      <SafeAreaView style={{flex: 1, justifyContent:"center", alignItems:"flex-start"}}>
+        <FlatList
+          data={data}
+          renderItem={({item}) => <Chip 
+                                    action={() => {}}
+                                    color={'#FF9100'}
+                                    highlightColor={'#FFB85C'}
+                                    iconName={'times'}
+                                    text={item.label}
+                                    style={{marginRight: 8, marginBottom: 8}}/>}
+          keyExtractor={item => item.label}
+          
+          contentContainerStyle={{
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+          }}/>
+
+        {/* <ScrollView
+          contentContainerStyle={{
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+          }}>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello'/>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello world'/>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello world'/>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello world'/>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello world'/>
+          <Chip
+            action={() => {}}
+            color={'#FF9100'}
+            highlightColor={'#FFB85C'}
+            iconName={'times'}
+            text='Hello world'/>
+        </ScrollView> */}
       </SafeAreaView>
     </>
   );

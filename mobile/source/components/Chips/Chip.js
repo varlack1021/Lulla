@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-export default function Chip({action, color, highlightColor, iconName, text}) {
+export default function Chip({action, color, highlightColor, iconName, text, style}) {
     const componentBackgroundColor = useRef(new Animated.Value(1)).current;
     const componentOpacity = useRef(new Animated.Value(1)).current;
 
@@ -22,54 +22,56 @@ export default function Chip({action, color, highlightColor, iconName, text}) {
     });
 
     return(
-        <TouchableWithoutFeedback 
-            onPressIn={() => {
-                Animated.timing(componentBackgroundColor, {
-                    toValue: 0,
-                    duration: 65.5
-                }).start();
-            }}
-            onPressOut={() => {
-                Animated.timing(componentBackgroundColor, {
-                    toValue: 1,
-                    duration: 500
-                }).start();
-                action();
-            }}>
-            <Animated.View 
-                style={[styles.container, {
-                    backgroundColor: componentBackgroundColorRange,
-                    opacity: componentOpacityRange
-                }]}>
-                <TouchableWithoutFeedback 
-                    onPressIn={() => {
-                        Animated.timing(componentBackgroundColor, {
-                            toValue: 0,
-                            duration: 65.5
-                        }).start();
-                    }}
-                    onPressOut={() => {
-                        Animated.parallel([
+        <View style={[style]}>
+            <TouchableWithoutFeedback 
+                onPressIn={() => {
+                    Animated.timing(componentBackgroundColor, {
+                        toValue: 0,
+                        duration: 65.5
+                    }).start();
+                }}
+                onPressOut={() => {
+                    Animated.timing(componentBackgroundColor, {
+                        toValue: 1,
+                        duration: 500
+                    }).start();
+                    action();
+                }}>
+                <Animated.View 
+                    style={[styles.container, {
+                        backgroundColor: componentBackgroundColorRange,
+                        opacity: componentOpacityRange
+                    }]}>
+                    <TouchableWithoutFeedback 
+                        onPressIn={() => {
                             Animated.timing(componentBackgroundColor, {
-                                toValue: 1,
-                                duration: 500
-                            }),
-                            Animated.timing(componentOpacity, {
                                 toValue: 0,
-                                duration: 500
-                            })
-                        ]).start();
-                    }}>
-                    <Icon 
-                        name={iconName}
-                        size={16}
-                        color={"#FFFFFF"}
-                        suppressHighlighting={true}
-                        style={[styles.icon]}/>
-                </TouchableWithoutFeedback>
-                <Text style={[styles.text]}>{text}</Text>
-            </Animated.View>
-        </TouchableWithoutFeedback>
+                                duration: 65.5
+                            }).start();
+                        }}
+                        onPressOut={() => {
+                            Animated.parallel([
+                                Animated.timing(componentBackgroundColor, {
+                                    toValue: 1,
+                                    duration: 500
+                                }),
+                                Animated.timing(componentOpacity, {
+                                    toValue: 0,
+                                    duration: 500
+                                })
+                            ]).start();
+                        }}>
+                        <Icon 
+                            name={iconName}
+                            size={16}
+                            color={"#FFFFFF"}
+                            suppressHighlighting={true}
+                            style={[styles.icon]}/>
+                    </TouchableWithoutFeedback>
+                    <Text style={[styles.text]}>{text}</Text>
+                </Animated.View>
+            </TouchableWithoutFeedback>
+        </View>
     );
 }
 
