@@ -1,31 +1,72 @@
+from todoist.api import TodoistAPI
+from flask import request
+from pprint import pprint
+
 import requests
 import yaml
-from pprint import pprint
-from todoist import TodoistAPI
-from pprint import pprint
 import json
+import os
+import random
+import string
+
+'''
+---------Todist API Example-------------
+I want to keep this for future use
 
 session = requests.Session()
 
-
-'''with open('services/credentials.yml') as file:
+with open('services/credentials.yml') as file:
 	data = yaml.safe_load(file)
-testToken = data['credentials']['toDoistApi']['testToken']
+testToken = data['credentials']['TodoistAPI']['testToken']
 api = TodoistAPI(token=testToken)
 api.sync()
-'''
-code = "e1f6e973b473f04b6fd9d1c100d1e99801c1c96c"
-url = "https://todoist.com/oauth/access_token?client_id=bd973b3f2c0f452d8bb8b5dc271b2115&client_secret=397847abcad1458b88e524db46c49ade&code={}".format(code)
-data = session.post(url)
-data = data.json()
 
-pprint(data['access_token'])
-#pprint(api.state['items'][2])
-#session.headers.update(testToken)
 
+for state in api.state:
+	print(state)
 url = "https://todoist.com/oauth/authorize?"
-def auth():
-	data = session.post("https://todoist.com/oauth/access_token?client_id=bd973b3f2c0f452d8bb8b5dc271b2115&client_secret=397847abcad1458b88e524db46c49ade&code=260a9eafe2025567ffcfba339fe89f22af620e8")
+'''
+#--------------Authentication------------
+def authenticate():
+	dir = os.getcwd()
+	configs = "services/credentials.yml"
+	path = os.path.join(dir, configs)
+	
+	with open(path) as file:
+			data = yaml.safe_load(file)
+
+	data = data['credentials']['TodoistAPI']
+	redirectUri = data['redirectUri']
+	client_id = data['client_id']
+	scope = data['scope']
+	state = ''.join([random.choice(string.ascii_uppercase) for x in range(random.randrange(10, 20))])
+	redirectUri += "client_id={}&scope={}&state={}".format(client_id, scope, state)
+	
+	return redirectUri
+
+def callback():
+	dir = os.getcwd()
+	configs = "services/credentials.yml"
+	path = os.path.join(dir, configs)
+
+	with open(path) as file:
+		data = yaml.safe_load(file)
+
+	data = data['credentials']['TodoistAPI']
+	auth_uri = data['authUri']
+	client_id = data['client_id']
+	client_secret = data['client_secret']
+	code = request.args['code']
+
+	url = "{}client_id={}&client_secret={}&code={}".format(auth_uri, client_id, client_secret, code)
+	
+	session = requests.Session()
+
+	data = session.post(url)
+	data = data.json()
+	
+	if 'access_token' not in data:
+		return "400 Response"
 	pprint(data)
-
-
+	#im thinking about putting a method or function here
+	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], data['access_token'])

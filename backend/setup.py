@@ -6,6 +6,7 @@ import logging
 import sys
 ###This file simply loads data into a database
 ###Is not needed after running once
+###Which is why it does not exist in the utils sub folder
 log = logging.getLogger(__name__)
 logging.basicConfig(
 	stream=sys.stdout,

@@ -3,8 +3,8 @@ from graphene_sqlalchemy import SQLAlchemyObjectType
 from database.services_model import ModelService
 from database.base import db_session
 from datetime import datetime
+from utils import utils
 import graphene
-import utils
 import hashlib
 #The data that I want the client to have access to 
 #Must match columns inside the table
