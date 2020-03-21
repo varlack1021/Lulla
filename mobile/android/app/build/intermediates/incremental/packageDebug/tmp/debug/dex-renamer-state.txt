@@ -1,0 +1,4 @@
+#Mon Jan 13 21:51:43 EST 2020
+base.0=/Users/jordanethomas/Projects/Mobile-Apps/Lulla/mobile/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

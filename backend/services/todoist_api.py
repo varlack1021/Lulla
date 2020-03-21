@@ -20,11 +20,19 @@ with open('services/credentials.yml') as file:
 testToken = data['credentials']['TodoistAPI']['testToken']
 api = TodoistAPI(token=testToken)
 api.sync()
+<<<<<<< HEAD
+=======
+'''
+code = "e1f6e973b473f04b6fd9d1c100d1e99801c1c96c"
+data = session.post(url)
+data = data.json()
+>>>>>>> origin/master
 
 
 for state in api.state:
 	print(state)
 url = "https://todoist.com/oauth/authorize?"
+<<<<<<< HEAD
 '''
 #--------------Authentication------------
 def authenticate():
@@ -48,6 +56,10 @@ def callback():
 	dir = os.getcwd()
 	configs = "services/credentials.yml"
 	path = os.path.join(dir, configs)
+=======
+def auth():
+	pprint(data)
+>>>>>>> origin/master
 
 	with open(path) as file:
 		data = yaml.safe_load(file)
