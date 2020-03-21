@@ -38,6 +38,5 @@ Playground*/
 *.yml
 *.json
 *.pickle
-google_calendar_api.py
 bb_api.py
 tests.py
