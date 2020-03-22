@@ -1,12 +1,11 @@
-from flask import Flask, request, redirect, jsonify, session, url_for
+from flask import Flask, request, redirect, session, url_for
 from database.base import db_session
 
 from flask_graphql import GraphQLView
 from schemas.schema import schema, Query
 
 from services import todoist_api, google_calendar_api
-from pprint import pprint
-import json
+
 
 app = Flask(__name__)
 
@@ -24,18 +23,18 @@ def login():
 
 #-------------Todoist API----------------------
 
-@app.route('/authTodoist', methods=['GET'])
+@app.route('/authtodoist', methods=['GET'])
 def authenticateTodoist():
 	
-	redirectUri = todoist_api.authenticate()	
-	return redirect(redirectUri)
+	authorization_url = todoist_api.authenticate()	
+	return redirect(authorization_url)
 
-@app.route('/Todoistcallback', methods=['GET'])
+@app.route('/todoistcallback', methods=['GET'])
 def Todoistcallback():
 	
 	result = todoist_api.callback()
 	#for now displays results for testing purposes
-	#will add redirect back to app
+	#Will redirect back to app
 	return result
 
 #----------------Google Calendar API----------------
@@ -49,13 +48,12 @@ def authenticateGoogle():
 #will have to change some naming conventions
 @app.route('/google', methods=['GET'])
 def googleCallBack():
-	state = request.args['state']
-	print(state)
+	
 	auth_response = request.url
 	credentials = google_calendar_api.callback(state, auth_response)
 
-	#this will also return back to the app
-	return jsonify(credentials)
+	#Will ridirect back to the app
+	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token)
 
 if __name__ == '__main__':
 	#context = ('cert.pem', 'key.pem')
