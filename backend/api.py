@@ -50,7 +50,7 @@ def authenticateGoogle():
 def googleCallBack():
 	
 	auth_response = request.url
-	credentials = google_calendar_api.callback(state, auth_response)
+	credentials = google_calendar_api.callback(auth_response)
 
 	#Will ridirect back to the app
 	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token)

@@ -1,13 +1,14 @@
+from database.todoist_model import ModelTodoist
 from todoist.api import TodoistAPI
 from flask import request
-from pprint import pprint
+from utils import save_response
 
 import requests
+import random
+import string
 import yaml
 import json
 import os
-import random
-import string
 
 '''
 ---------Todist API Example-------------
@@ -31,8 +32,8 @@ url = "https://todoist.com/oauth/authorize?"
 '''
 
 #--------------Authentication------------
-def authenticate():
-	#might update with os.path.dirname(__file__)
+def open_configs():
+	
 	dir = os.getcwd()
 	configs = "services/credentials.yml"
 	path = os.path.join(dir, configs)
@@ -40,24 +41,24 @@ def authenticate():
 	with open(path) as file:
 			data = yaml.safe_load(file)
 
-	data = data['credentials']['TodoistAPI']
+	return data['credentials']['TodoistAPI']	
+
+def authenticate():
+
+	data = open_configs()
+
 	redirectUri = data['redirectUri']
 	client_id = data['client_id']
 	scope = data['scope']
 	state = ''.join([random.choice(string.ascii_uppercase) for x in range(random.randrange(10, 20))])
-	redirectUri += "client_id={}&scope={}&state={}".format(client_id, scope, state)
 	
+	redirectUri += "client_id={}&scope={}&state={}".format(client_id, scope, state)
 	return redirectUri
 
 def callback():
-	dir = os.getcwd()
-	configs = "services/credentials.yml"
-	path = os.path.join(dir, configs)
 
-	with open(path) as file:
-		data = yaml.safe_load(file)
-
-	data = data['credentials']['TodoistAPI']
+	data = open_configs()
+	
 	auth_uri = data['authUri']
 	client_id = data['client_id']
 	client_secret = data['client_secret']
@@ -66,12 +67,12 @@ def callback():
 	url = "{}client_id={}&client_secret={}&code={}".format(auth_uri, client_id, client_secret, code)
 	
 	session = requests.Session()
-
-	data = session.post(url)
-	data = data.json()
-	
-	if 'access_token' not in data:
+	response = session.post(url).json()
+	#add error handling here
+	if 'access_token' not in response:
 		return "400 Response"
-	pprint(data)
-	#im thinking about putting a method or function here
-	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], data['access_token'])
+	
+	#this method will also need to pass the uid
+	save_response.save_response(id=3, new_model=ModelTodoist(**response), model=ModelTodoist, response=response)
+	#code does not need a return method
+	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], response['access_token'])

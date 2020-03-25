@@ -1,6 +1,5 @@
 from database.base import db_session
 from sqlalchemy import inspect
-from database.todoist_model import ModelTodoist
 
 #need to change look up to UID
 #will change location of access token storage with proper table
@@ -16,10 +15,10 @@ def object_as_dict(obj):
 #check if the model already exists
 def save_response(**kwargs):
 	#will filter by something kwargs['']
-	user = db_session.query(ModelTodoist).filter_by(kwargs[''])
+	user = db_session.query(kwargs['model']).filter_by(id=kwargs['id'])
 	
 	if user.all() == []:
-		model = kwargs['model']
+		model = kwargs['new_model']
 		db_session.add(model)
 	else:
 		user.update(kwargs["response"])
