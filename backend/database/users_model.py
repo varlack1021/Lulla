@@ -1,7 +1,7 @@
 from .base import Base
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from .services_model import ModelService
+from .todoist_model import ModelTodoist
 
 class ModelUser(Base):
 
@@ -11,4 +11,5 @@ class ModelUser(Base):
 	email = Column('email', String)
 	passphrase = Column('passphrase', String)
 	user_name = Column('user_name', String)
-	user_services = relationship('ModelService', backref='owner')
+	todoist_id = Column('todoist_id', Integer, ForeignKey('todoist.id'))
+	todoist = relationship('ModelTodoist', backref="users", uselist=False)

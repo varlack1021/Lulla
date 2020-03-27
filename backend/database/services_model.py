@@ -9,4 +9,3 @@ class ModelService(Base):
 	service = Column('service', String)
 	passphrase = Column('passphrase', String)
 	username = Column('username', String)
-	user_id = Column(Integer, ForeignKey('users.id'))

@@ -1,5 +1,7 @@
 from .base import Base
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+
 
 class ModelTodoist(Base):
 

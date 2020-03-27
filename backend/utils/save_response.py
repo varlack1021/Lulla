@@ -1,27 +1,33 @@
 from database.base import db_session
 from sqlalchemy import inspect
 
-#need to change look up to UID
-#will change location of access token storage with proper table
 
 #turns the query object into a dic
+#which allows to be printed
+#for testing purposeses
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
 
 #for row in user:
 #		print(object_as_dict(row))
-#need more error handling
-#check if the model already exists
 def save_response(**kwargs):
-	#will filter by something kwargs['']
-	user = db_session.query(kwargs['model']).filter_by(id=kwargs['id'])
-	
-	if user.all() == []:
-		model = kwargs['new_model']
-		db_session.add(model)
+
+	#will add conditional to check if email is already in use
+	if str(kwargs['model']) == "<class 'database.users_model.ModelUser'>":
+		query_result = db_session.query(kwargs['model']).filter_by(email=kwargs['data']['email']).first()
+		if query_result:
+			return "Email already in use"
+
+		#first returns None if not found
+	query_result = db_session.query(kwargs['model']).filter_by(id=15).first()
+
+	if not query_result:
+		new_model = kwargs['model'](**kwargs['data'])
+		db_session.add(new_model)
 	else:
-		user.update(kwargs["response"])
+		query_result.update(kwargs["response"])
 
 	db_session.commit()
 
+	return "Account Created"
