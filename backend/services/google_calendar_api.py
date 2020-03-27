@@ -3,7 +3,8 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from flask import url_for
 from pprint import pprint
-from utils import save_response, create_uid
+from utils.save_to_database import save_to_database
+from utils.create_uid import create_uid
 
 #Using the google api client libary
 #This handles tasks we would otherwise need to define
@@ -43,14 +44,14 @@ def callback(auth_response):
     #need to have error handling
     response = credentials_to_dict(flow.credentials)
     #add user id here
-    save_response.save_response(id=5, model=ModelGoogleCalendar, response=response)
+    save_to_database(id=5, model=ModelGoogleCalendar, response=response)
 
     #does not need a return statement
     return flow.credentials
 
 
 def credentials_to_dict(credentials):
-  return {'id': create_uid.create_uid(ModelGoogleCalendar),
+  return {'id': create_uid(ModelGoogleCalendar),
           'access_token': credentials.token,
           'refresh_token': credentials.refresh_token,
           'token_uri': credentials.token_uri,

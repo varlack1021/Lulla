@@ -11,7 +11,7 @@ def object_as_dict(obj):
 
 #for row in user:
 #		print(object_as_dict(row))
-def save_response(**kwargs):
+def save_to_database(**kwargs):
 
 	#will add conditional to check if email is already in use
 	if str(kwargs['model']) == "<class 'database.users_model.ModelUser'>":

@@ -1,10 +1,9 @@
 from flask import Flask, request, redirect, session, url_for
 from database.base import db_session
-
 from flask_graphql import GraphQLView
 from schemas.schema import schema, Query
 from services import todoist_api, google_calendar_api
-from utils import save_response, create_uid
+from utils.save_to_database import save_to_database
 from database.users_model import ModelUser
 
 app = Flask(__name__)
@@ -24,8 +23,9 @@ def create_account():
 	for arg in request.args:
 		data[arg] = request.args[arg]
 	#just need to pass this data to the model
-	save_response.save_response(model=ModelUser, data=data)
-	return save_response.save_response(model=ModelUser, data=data)
+	save_to_database(model=ModelUser, data=data)
+	#this will route to somewhere else
+	return save_to_database(model=ModelUser, data=data)
 
 
 #-------------Todoist API----------------------
