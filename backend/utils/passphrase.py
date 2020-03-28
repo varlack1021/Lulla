@@ -15,6 +15,3 @@ def check_passphrase(email, passphrase):
 		return True
 	else:
 		return False
-
-
-

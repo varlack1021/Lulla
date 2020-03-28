@@ -6,7 +6,9 @@ from services import todoist_api, google_calendar_api
 from utils.save_to_database import save_to_database
 from utils.passphrase import check_passphrase
 from database.users_model import ModelUser
+import yaml
 import sys
+import os
 app = Flask(__name__)
 
 app.add_url_rule(
@@ -23,8 +25,12 @@ def shutdown_session(exception=None):
 
 @app.route('/login', methods=['POST'])
 def login():
+	if 'email' not in request.args or 'passphrase' not in request.args:
+		return "Missing Arguments"
+
 	if check_passphrase(email=request.args['email'], passphrase=request.args['passphrase']):
-		#session['logged_on'] = True
+		session['logged_on'] = True
+		print(session['logged_on'])
 		#need to update session with secret key error
 		return "True"
 	else:
@@ -45,7 +51,8 @@ def create_account():
 #-------------Todoist API----------------------
 #uid is done - do we need to randomly generate?
 #created one to one relationships, best way to do this?
-#Add error handling, encrypt access tokens, login systems,
+#Added login system - how do we tell if user is logged in?
+#Add error handling, encrypt access tokens, 
 #then the actual preferrences
 
 
@@ -84,4 +91,17 @@ def googleCallBack():
 if __name__ == '__main__':
 	#context = ('cert.pem', 'key.pem')
 	#add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
+	#need to change this pathing	
+	dir = os.getcwd()
+	configs = "services/credentials.yml"
+	path = os.path.join(dir, configs)
+
+	with open(path) as file:
+		data = yaml.safe_load(file)	
+	#needed to sign sessions
+	SECRET_KEY = data['credentials']['Flask']['SECRET_KEY']
+	app.secret_key = SECRET_KEY
 	app.run(debug=True, host='0.0.0.0', port=5000)
+
+
+

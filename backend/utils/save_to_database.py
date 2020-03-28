@@ -8,6 +8,8 @@ from .passphrase import check_passphrase
 #turns the query object into a dic
 #which allows to be printed
 #for testing purposeses
+
+#-----May Rewrite file for readability---------------
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
