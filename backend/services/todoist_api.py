@@ -68,12 +68,12 @@ def callback():
 	url = "{}client_id={}&client_secret={}&code={}".format(auth_uri, client_id, client_secret, code)
 	
 	session = requests.Session()
-	response = session.post(url).json()
+	data = session.post(url).json()
 	#add error handling here
 	if 'access_token' not in response:
 		return "400 Response"
-	response['id'] = create_uid(ModelTodoist)
+	data['id'] = create_uid(ModelTodoist)
 	#this method will also need to pass the uid, currently a placeHolder
-	save_to_database(id=3, model=ModelTodoist, response=response)
+	save_to_database(id=3, model=ModelTodoist, data=data)
 	#code does not need a return method
-	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], response['access_token'])
+	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], data['access_token'])

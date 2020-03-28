@@ -4,16 +4,32 @@ from flask_graphql import GraphQLView
 from schemas.schema import schema, Query
 from services import todoist_api, google_calendar_api
 from utils.save_to_database import save_to_database
+from utils.passphrase import check_passphrase
 from database.users_model import ModelUser
-
+import sys
 app = Flask(__name__)
 
 app.add_url_rule(
 	'/graphql',
 	view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
 
+#this is how we protect endpoints
+#but what will we use to protect endpoints?
+def login_required():
+	pass
+
 def shutdown_session(exception=None):
     db_session.remove()
+
+@app.route('/login', methods=['POST'])
+def login():
+	if check_passphrase(email=request.args['email'], passphrase=request.args['passphrase']):
+		#session['logged_on'] = True
+		#need to update session with secret key error
+		return "True"
+	else:
+		return "Username or Password is incorrect"
+
 
 @app.route('/create_account', methods=['POST'])
 def create_account():
@@ -22,8 +38,6 @@ def create_account():
 	#change the immutable dic to a dic
 	for arg in request.args:
 		data[arg] = request.args[arg]
-	#just need to pass this data to the model
-	save_to_database(model=ModelUser, data=data)
 	#this will route to somewhere else
 	return save_to_database(model=ModelUser, data=data)
 
@@ -53,7 +67,6 @@ def Todoistcallback():
 
 @app.route('/authgoogle', methods=['GET'])
 def authenticateGoogle():
-
 	authorization_url = google_calendar_api.authenticate()
 	return redirect(authorization_url)
 
@@ -63,6 +76,7 @@ def googleCallBack():
 	
 	auth_response = request.url
 	credentials = google_calendar_api.callback(auth_response)
+	#to get uid of users could I query user by email?
 
 	#Will ridirect back to the app
 	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token)

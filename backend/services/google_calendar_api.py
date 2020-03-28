@@ -42,9 +42,9 @@ def callback(auth_response):
     flow.fetch_token(authorization_response=authorization_response)
 
     #need to have error handling
-    response = credentials_to_dict(flow.credentials)
+    data = credentials_to_dict(flow.credentials)
     #add user id here
-    save_to_database(id=5, model=ModelGoogleCalendar, response=response)
+    save_to_database(id=5, model=ModelGoogleCalendar, data=data)
 
     #does not need a return statement
     return flow.credentials
