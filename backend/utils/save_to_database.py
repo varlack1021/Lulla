@@ -35,6 +35,7 @@ def save_user_data(kwargs):
 def save_services_data(kwargs):
 
 	query_result = db_session.query(kwargs['model']).filter_by(user_id=kwargs['user_id'])																			
+	
 	if not query_result.first():							#.first() will return None if not found
 		kwargs['data']['id'] = create_uid(kwargs['model'])
 		kwargs['data']['user_id'] = kwargs['user_id']
