@@ -2,13 +2,11 @@ from database.base import db_session
 from database.users_model import ModelUser
 from sqlalchemy import inspect
 
-import bcrypt
 from .create_uid import create_uid
 from .passphrase import hash_passphrase
 from .passphrase import check_passphrase
-#turns the query object into a dic
-#which allows to be printed
-#for testing purposeses
+
+import bcrypt
 
 #-----May Rewrite file for readability---------------
 

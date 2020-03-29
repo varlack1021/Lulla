@@ -5,11 +5,10 @@ from schemas.schema import schema, Query
 from services import todoist_api, google_calendar_api
 from utils.save_to_database import save_to_database
 from utils.passphrase import check_passphrase
+from utils.open_configs import open_configs
+
 from database.users_model import ModelUser
 
-from database.todoist_model import ModelTodoist
-
-import yaml
 import sys
 import os
 app = Flask(__name__)
@@ -101,19 +100,12 @@ def googleCallBack():										#if changed, must be updated in GCP
 	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token) # will redirect back to app
 
 if __name__ == '__main__':
-	#need to change this pathing	
-	dir = os.getcwd()
-	configs = "services/credentials.yml"
-	path = os.path.join(dir, configs)
-
-	with open(path) as file:
-		data = yaml.safe_load(file)	
-	#needed to sign sessions
-	SECRET_KEY = data['credentials']['Flask']['SECRET_KEY']
-	app.secret_key = SECRET_KEY
-
-	#add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
-	app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
+	
+	data = open_configs()
+	SECRET_KEY = data['Flask']['SECRET_KEY']
+	app.secret_key = secret_key 							#need to sign sessions
+	
+	app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc') #add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
 
 
 

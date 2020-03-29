@@ -2,6 +2,7 @@ from database.todoist_model import ModelTodoist
 from todoist.api import TodoistAPI
 from flask import request
 from utils.save_to_database import save_to_database
+from utils.open_configs import open_configs
 
 import requests
 import random
@@ -22,30 +23,17 @@ testToken = data['credentials']['TodoistAPI']['testToken']
 api = TodoistAPI(token=testToken)
 api.sync()
 
-
-
-
-
 for state in api.state:
 	print(state)
 url = "https://todoist.com/oauth/authorize?"
 '''
 
 #--------------Authentication------------
-def open_configs():
 	
-	dir = os.getcwd()
-	configs = "services/credentials.yml"
-	path = os.path.join(dir, configs)
-	
-	with open(path) as file:
-			data = yaml.safe_load(file)
-
-	return data['credentials']['TodoistAPI']	
 
 def authenticate():
 
-	data = open_configs()
+	data = open_configs()['TodoistAPI']
 
 	redirectUri = data['redirectUri']
 	client_id = data['client_id']
@@ -57,7 +45,7 @@ def authenticate():
 
 def callback(user_id):
 
-	data = open_configs()
+	data = open_configs()['TodoistAPI']
 	
 	auth_uri = data['authUri']
 	client_id = data['client_id']

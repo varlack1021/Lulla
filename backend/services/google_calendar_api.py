@@ -28,24 +28,21 @@ def authenticate():
 
     return authorization_url
 
-def callback(auth_response, user_id):
-    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+def callback(authorization_response, user_id):                          #needs more error handling
+    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(     
     'services/client_secret.json',
     scopes=['https://www.googleapis.com/auth/calendar.addons.execute'],
     state=state)
-    #url_for builds a url so we do not need to generate the whole url
     #flow.redirect_uri = url_for('googleCallBack')
-    #add this to yaml file
-    flow.redirect_uri = "https://localhost:5000/google"
-    authorization_response = auth_response
+    flow.redirect_uri = "https://localhost:5000/google"                 #savce redirect uri in configs or use flask url_for
     flow.fetch_token(authorization_response=authorization_response)
 
     #need to have error handling
     data = credentials_to_dict(flow.credentials)
     save_to_database(user_id=user_id, model=ModelGoogleCalendar, data=data)
 
-    #does not need a return statement
-    return flow.credentials
+
+    return flow.credentials                                             #does not need a return statement, will takeout once done testing
 
 
 def credentials_to_dict(credentials):
