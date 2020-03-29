@@ -1,9 +1,8 @@
 import os
 import yaml
 
-def open_configs():
-	
-	dir = os.getcwd()
+def open_configs():						#opens config file
+	dir = os.getcwd()					#will need to chage pathing
 	configs = "services/credentials.yml"
 	path = os.path.join(dir, configs)
 	
