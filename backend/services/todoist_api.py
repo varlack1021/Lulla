@@ -1,8 +1,7 @@
 from database.todoist_model import ModelTodoist
 from todoist.api import TodoistAPI
 from flask import request
-from utils import save_to_database
-from utils import create_uid
+from utils.save_to_database import save_to_database
 
 import requests
 import random
@@ -56,7 +55,7 @@ def authenticate():
 	redirectUri += "client_id={}&scope={}&state={}".format(client_id, scope, state)
 	return redirectUri
 
-def callback():
+def callback(user_id):
 
 	data = open_configs()
 	
@@ -69,11 +68,10 @@ def callback():
 	
 	session = requests.Session()
 	data = session.post(url).json()
-	#add error handling here
-	if 'access_token' not in response:
-		return "400 Response"
-	data['id'] = create_uid(ModelTodoist)
-	#this method will also need to pass the uid, currently a placeHolder
-	save_to_database(id=3, model=ModelTodoist, data=data)
-	#code does not need a return method
-	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], data['access_token'])
+
+	if 'access_token' not in data:
+		return "Todoist returned with a 400 response"
+	save_to_database(user_id=user_id, model=ModelTodoist, data=data)
+																
+																#return method is not necessary
+	return "code is {} state is {} and the access_token is {}".format(request.args['code'], request.args['state'], data['access_token']) #

@@ -1,4 +1,5 @@
 from database.base import db_session
+from database.users_model import ModelUser
 from sqlalchemy import inspect
 
 import bcrypt
@@ -16,30 +17,43 @@ def object_as_dict(obj):
 	
 #for row in user:
 #		print(object_as_dict(row))
-def save_to_database(**kwargs):
-	#checks for model user
-	#if so special processes must happen
-	if str(kwargs['model']) == "<class 'database.users_model.ModelUser'>":
-		#checks to see if user already made an account with the given email
-		email = kwargs['data']['email']
-		if db_session.query(kwargs['model']).filter_by(email=email).first():
-			return "Email already in use"
 
-		kwargs['data']['passphrase'] = hash_passphrase(kwargs['data']['passphrase'])
+def save_user_data(kwargs):
+	#checks to see if user already made an account with the given email
+	email = kwargs['data']['email']
+	if db_session.query(kwargs['model']).filter_by(email=email).first():
+		return "Email already in use"
 
-	#first returns None if not found
-	#will query user model again
-	#however trade would be to create a seperate module 
-	#to save user model
-	query_result = db_session.query(kwargs['model']).filter_by(id=19).first()
-	if not query_result:
+	kwargs['data']['passphrase'] = hash_passphrase(kwargs['data']['passphrase'])
+	kwargs['data']['id'] = create_uid(kwargs['model'])
+
+	new_model = kwargs['model'](**kwargs['data'])
+	db_session.add(new_model)
+	db_session.commit()
+	return "Account Created"
+
+def save_services_data(kwargs):
+
+	query_result = db_session.query(kwargs['model']).filter_by(user_id=kwargs['user_id'])																			
+	if not query_result.first():							#.first() will return None if not found
 		kwargs['data']['id'] = create_uid(kwargs['model'])
+		kwargs['data']['user_id'] = kwargs['user_id']
 		new_model = kwargs['model'](**kwargs['data'])
 		db_session.add(new_model)
+		print("new model added")
 	else:
-		query_result.update(kwargs["response"])
+		print("updated------------")
+		query_result.update(kwargs["data"])					#if we use .first() here then the object will not have the update attribute
 
 	db_session.commit()
+	return "Data Added"
 
-	#this return is for testing
-	return "Account Created"
+def save_to_database(**kwargs):
+	if str(kwargs['model']) == "<class 'database.users_model.ModelUser'>":	
+		save_user_data(kwargs)
+	else:
+		save_services_data(kwargs)
+
+
+
+

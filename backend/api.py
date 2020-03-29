@@ -6,6 +6,9 @@ from services import todoist_api, google_calendar_api
 from utils.save_to_database import save_to_database
 from utils.passphrase import check_passphrase
 from database.users_model import ModelUser
+
+from database.todoist_model import ModelTodoist
+
 import yaml
 import sys
 import os
@@ -23,15 +26,26 @@ def login_required():
 def shutdown_session(exception=None):
     db_session.remove()
 
+#---------------Login System----------------------
+
+@app.route('/test', methods=['GET'])
+def test():
+	session['logged_on'] = True
+	session['user_id'] = "1557"
+	data= {"access_token": "15dfeght"}
+	save_to_database(model=ModelTodoist, user_id=session['user_id'], data=data)
+	return "Logged on potentially {}".format(session['user_id'])
+
 @app.route('/login', methods=['POST'])
 def login():
 	if 'email' not in request.args or 'passphrase' not in request.args:
 		return "Missing Arguments"
 
-	if check_passphrase(email=request.args['email'], passphrase=request.args['passphrase']):
+	user_id = check_passphrase(email=request.args['email'], passphrase=request.args['passphrase'])
+	
+	if (_id):	
 		session['logged_on'] = True
-		print(session['logged_on'])
-		#need to update session with secret key error
+		session['user_id'] = user_id
 		return "True"
 	else:
 		return "Username or Password is incorrect"
@@ -39,19 +53,17 @@ def login():
 
 @app.route('/create_account', methods=['POST'])
 def create_account():
-	data = {}
-	#the request.arg is immutable dic but I need to process data
-	#change the immutable dic to a dic
-	for arg in request.args:
-		data[arg] = request.args[arg]
-	#this will route to somewhere else
-	return save_to_database(model=ModelUser, data=data)
+	data = {}											#changes immutable dic to dic
+	for arg in request.args:							#since I need to add data to the dic
+		data[arg] = request.args[arg]				
+
+	return save_to_database(model=ModelUser, data=data) #will redirect back to app
 
 
 #-------------Todoist API----------------------
 #uid is done - do we need to randomly generate?
-#created one to one relationships, best way to do this?
-#Added login system - how do we tell if user is logged in?
+#created one to one relationships, currently mapped one to one?
+#Added login system - use session to determine if logged on
 #Add error handling, encrypt access tokens, 
 #then the actual preferrences
 
@@ -65,32 +77,25 @@ def authenticateTodoist():
 @app.route('/todoistcallback', methods=['GET'])
 def Todoistcallback():
 	
-	result = todoist_api.callback()
-	#for now displays results for testing purposes
-	#Will redirect back to app
-	return result 
+	result = todoist_api.callback(session['user_id'])		#for now displays results for testing purposes
+	return result 										#will redirect back to app
 
 #----------------Google Calendar API----------------
 
 @app.route('/authgoogle', methods=['GET'])
 def authenticateGoogle():
+	
 	authorization_url = google_calendar_api.authenticate()
 	return redirect(authorization_url)
 
-#will have to change some naming conventions
-@app.route('/google', methods=['GET'])
+@app.route('/google', methods=['GET'])					#will need to change naming conventions
 def googleCallBack():
 	
 	auth_response = request.url
-	credentials = google_calendar_api.callback(auth_response)
-	#to get uid of users could I query user by email?
-
-	#Will ridirect back to the app
-	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token)
+	credentials = google_calendar_api.callback(auth_response, session['user_id'])
+	return "Access token is: {} <br> Refresh token is {}".format(credentials.token, credentials.refresh_token) # will redirect back to app
 
 if __name__ == '__main__':
-	#context = ('cert.pem', 'key.pem')
-	#add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
 	#need to change this pathing	
 	dir = os.getcwd()
 	configs = "services/credentials.yml"
@@ -101,7 +106,9 @@ if __name__ == '__main__':
 	#needed to sign sessions
 	SECRET_KEY = data['credentials']['Flask']['SECRET_KEY']
 	app.secret_key = SECRET_KEY
-	app.run(debug=True, host='0.0.0.0', port=5000)
+
+	#add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
+	app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
 
 
 
