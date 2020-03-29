@@ -11,7 +11,9 @@ from .passphrase import check_passphrase
 #for testing purposeses
 
 #-----May Rewrite file for readability---------------
-def object_as_dict(obj):
+
+
+def object_as_dict(obj):													#prints the model attributes
     return {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
 	
@@ -19,9 +21,9 @@ def object_as_dict(obj):
 #		print(object_as_dict(row))
 
 def save_user_data(kwargs):
-	#checks to see if user already made an account with the given email
 	email = kwargs['data']['email']
-	if db_session.query(kwargs['model']).filter_by(email=email).first():
+	if db_session.query(kwargs['model']).filter_by(email=email).first():	#checks to see if user already made an account with the given email
+
 		return "Email already in use"
 
 	kwargs['data']['passphrase'] = hash_passphrase(kwargs['data']['passphrase'])
@@ -36,15 +38,13 @@ def save_services_data(kwargs):
 
 	query_result = db_session.query(kwargs['model']).filter_by(user_id=kwargs['user_id'])																			
 	
-	if not query_result.first():							#.first() will return None if not found
+	if not query_result.first():											#.first() will return None if not found
 		kwargs['data']['id'] = create_uid(kwargs['model'])
 		kwargs['data']['user_id'] = kwargs['user_id']
 		new_model = kwargs['model'](**kwargs['data'])
 		db_session.add(new_model)
-		print("new model added")
 	else:
-		print("updated------------")
-		query_result.update(kwargs["data"])					#if we use .first() here then the object will not have the update attribute
+		query_result.update(kwargs["data"])									#if we use .first() here then the object will not have the update attribute
 
 	db_session.commit()
 	return "Data Added"

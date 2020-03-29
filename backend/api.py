@@ -53,9 +53,14 @@ def login():
 
 @app.route('/create_account', methods=['POST'])
 def create_account():
-	data = {}											#changes immutable dic to dic
-	for arg in request.args:							#since I need to add data to the dic
-		data[arg] = request.args[arg]				
+	data = {}
+
+	if "email" not in request.args or 'passphrase' not in request.args:
+		return "Missing Argumets"
+														
+	for arg in request.args:							#changes immutable dic to dic#
+		data[arg] = request.args[arg]					#since I need to add data to the dic
+						
 
 	return save_to_database(model=ModelUser, data=data) #will redirect back to app
 
@@ -78,7 +83,7 @@ def authenticateTodoist():
 def Todoistcallback():
 	
 	result = todoist_api.callback(session['user_id'])		#for now displays results for testing purposes
-	return result 										#will redirect back to app
+	return result 											#will redirect back to app
 
 #----------------Google Calendar API----------------
 
@@ -86,10 +91,10 @@ def Todoistcallback():
 def authenticateGoogle():
 	
 	authorization_url = google_calendar_api.authenticate()
-	return redirect(authorization_url)
+	return redirect(authorization_url)	
 
-@app.route('/google', methods=['GET'])					#will need to change naming conventions
-def googleCallBack():
+@app.route('/google', methods=['GET'])						#will need to change naming conventions
+def googleCallBack():										#if changed, must be updated in GCP
 	
 	auth_response = request.url
 	credentials = google_calendar_api.callback(auth_response, session['user_id'])
