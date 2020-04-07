@@ -41,9 +41,7 @@ def callback(authorization_response, user_id):                          #needs m
     data = credentials_to_dict(flow.credentials)
     save_to_database(user_id=user_id, model=ModelGoogleCalendar, data=data)
 
-
     return flow.credentials                                             #does not need a return statement, will takeout once done testing
-
 
 def credentials_to_dict(credentials):
   return {

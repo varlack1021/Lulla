@@ -3,10 +3,7 @@ from database.users_model import ModelUser
 from sqlalchemy import inspect
 
 from .create_uid import create_uid
-from .passphrase import hash_passphrase
-from .passphrase import check_passphrase
-
-import bcrypt
+from .passphrase import hash_passphrase, check_passphrase
 
 #-----May Rewrite file for readability---------------
 
@@ -21,7 +18,6 @@ def object_as_dict(obj):													#prints the model attributes
 def save_user_data(kwargs):
 	email = kwargs['data']['email']
 	if db_session.query(kwargs['model']).filter_by(email=email).first():	#checks to see if user already made an account with the given email
-
 		return "Email already in use"
 
 	kwargs['data']['passphrase'] = hash_passphrase(kwargs['data']['passphrase'])
@@ -33,7 +29,6 @@ def save_user_data(kwargs):
 	return "Account Created"
 
 def save_services_data(kwargs):
-
 	query_result = db_session.query(kwargs['model']).filter_by(user_id=kwargs['user_id'])																			
 	
 	if not query_result.first():											#.first() will return None if not found
@@ -49,7 +44,7 @@ def save_services_data(kwargs):
 
 def save_to_database(**kwargs):
 	if str(kwargs['model']) == "<class 'database.users_model.ModelUser'>":	
-		save_user_data(kwargs)
+		return save_user_data(kwargs)
 	else:
 		save_services_data(kwargs)
 

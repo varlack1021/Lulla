@@ -6,11 +6,8 @@ from services import todoist_api, google_calendar_api
 from utils.save_to_database import save_to_database
 from utils.passphrase import check_passphrase
 from utils.open_configs import open_configs
-
 from database.users_model import ModelUser
 
-import sys
-import os
 app = Flask(__name__)
 
 app.add_url_rule(
@@ -68,7 +65,7 @@ def create_account():
 #uid is done - do we need to randomly generate?
 #created one to one relationships, currently mapped one to one?
 #Added login system - use session to determine if logged on
-#Add error handling, encrypt access tokens, 
+#Need to add error handling, encrypt access tokens, 
 #then the actual preferrences
 
 
@@ -103,9 +100,11 @@ if __name__ == '__main__':
 	
 	data = open_configs()
 	SECRET_KEY = data['Flask']['SECRET_KEY']
-	app.secret_key = secret_key 							#need to sign sessions
-	
+	app.secret_key = SECRET_KEY 							#need to sign sessions
+																		
 	app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc') #add ssl_context='adhoc' as a arg for https - DEVELOPTMENT ONLY
-
+																		#generates a new certificate each time the server runs
+																		#which does not allow us to configure the certificate to be
+																		#trusted by the browser
 
 
