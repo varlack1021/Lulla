@@ -7,7 +7,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from "../../config/colors";
 
-export default function RoundFlatActionButton({action, color, highlightColor, iconName}) {
+export default function RoundFlatActionButton({action, color, highlightColor, iconName, style}) {
     const ColorChangeIcon = Animated.createAnimatedComponent(Icon);
     const secondaryColor = useRef(new Animated.Value(0)).current;
 
@@ -36,7 +36,7 @@ export default function RoundFlatActionButton({action, color, highlightColor, ic
                     {
                     backgroundColor: colors.background,
                     borderColor: secondaryColorRange
-                }]}>
+                }, style]}>
                 <ColorChangeIcon 
                     name={iconName}
                     size={32}

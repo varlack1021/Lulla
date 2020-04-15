@@ -33,7 +33,8 @@ export default function TokenSet({data, primaryIconColor, primaryAction, seconda
             numColumns={2}
             ListHeaderComponent={() => renderHeader(focusID, title)}
             showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}/>
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{flexGrow: 1}}/>
     );
 }
 
@@ -78,7 +79,7 @@ function errorOnEmpty() {
 const styles = StyleSheet.create({
     token: {
         margin: 24,
-        marginBottom: 8
+        marginBottom: 8,
     },
     header: {
         marginLeft: 16,

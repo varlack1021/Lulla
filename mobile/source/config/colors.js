@@ -1,3 +1,10 @@
+import { 
+    BLACKBOARD_ID, 
+    GOOGLE_CALENDAR_ID, 
+    MICROSOFT_TODO_ID, 
+    TODOIST_ID 
+} from "./values";
+
 const primaryColor = '#FF9100';
 const primaryHighlightColor = '#FFB85C';
 const secondaryColor = '#4DA835';
@@ -8,10 +15,10 @@ const backgroundColor = '#FAFAFA';
 const black = '#000000';
 const white = '#FFFFFF';
 
-const TODOIST_ID = 'todoist';
-const BLACKBOARD_ID = 'blackboard';
-const MICROSOFT_TODO_ID = 'ms_todo';
-const GOOGLE_CALENDAR_ID = 'g_calendar';
+const signatureGradient = [
+    '#BA00FF', 
+    '#FF9100'
+];
 
 function getTokenColors(serviceID) {
     switch (serviceID) {
@@ -37,7 +44,10 @@ export default {
     IDBarDisabled: disabledColor,
     IDBarHighlight: primaryHighlightColor,
     background: backgroundColor,
-    LinkColors: {
-
-    }
+    //Links Colors
+    LinkPrimaryIconColor: primaryColor,
+    LinkPrimaryHighlightColor: primaryHighlightColor,
+    LinkSecondaryIconColor: secondaryColor,
+    LinkSecondaryHighlightColor: secondaryHighlightColor,
+    signatureGradient: signatureGradient
 }

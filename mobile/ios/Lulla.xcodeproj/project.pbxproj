@@ -24,6 +24,7 @@
 		47DD3AD3B1F0423ABA2A9697 /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7179C3BF50B14D12899FBC9A /* Raleway-Italic.ttf */; };
 		4C7BA3ACECAF48E8835557B6 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14EAE819BAE4816BB59D5DD /* Raleway-Bold.ttf */; };
 		55A6444411034AAC917281F8 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A278E357084245FD8CF86F29 /* Raleway-Black.ttf */; };
+		598543EB24230F2D00D63BD5 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		72AD64ED4A5748F3B28C3EB0 /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00E5B9D924394CCE93449AD7 /* Raleway-BlackItalic.ttf */; };
 		769560FA6A074760B6B21CB4 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D62A90C89F224A8BA7E12099 /* Raleway-Regular.ttf */; };
 		77C9899E19844143A3B02EA2 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAEB266E35FD45DA99D2BB0F /* Raleway-SemiBold.ttf */; };
@@ -422,6 +423,7 @@
 				D129BCD30EC841959BE60BA3 /* Raleway-ExtraLightItalic.ttf in Resources */,
 				47DD3AD3B1F0423ABA2A9697 /* Raleway-Italic.ttf in Resources */,
 				AA3A26DAB47D4043B9CD21FD /* Raleway-Light.ttf in Resources */,
+				598543EB24230F2D00D63BD5 /* main.jsbundle in Resources */,
 				81A9C36BBBAE4577B897CAF1 /* Raleway-LightItalic.ttf in Resources */,
 				DBC2BC6785D449E1AA7BDFB2 /* Raleway-Medium.ttf in Resources */,
 				1B83AD899F9F43248DFDF5FE /* Raleway-MediumItalic.ttf in Resources */,
@@ -463,7 +465,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		13EDC375386BC9FDB6E991BF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
