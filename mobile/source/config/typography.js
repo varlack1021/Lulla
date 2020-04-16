@@ -1,19 +1,47 @@
+import { 
+    MICROSOFT_TODO_ID, 
+    BLACKBOARD_ID, 
+    GOOGLE_CALENDAR_ID, 
+    TODOIST_ID 
+} from './values';
 // icons and typographic data
 
-const TODOIST_IMAGE = 'todoist';
-const BLACKBOARD_IMAGE = 'blackboard';
-const MICROSOFT_TODO_IMAGE = 'ms_todo';
-const GOOGLE_CALENDAR_IMAGE = 'g_calendar';
+const cancelIcon = 'times';
+const doorOpenIcon = 'door-open';
+const doorClosedIcon = 'door-closed';
+const chevronRightIcon = 'chevron-right';
+const plusIcon = 'plus';
+
+const LINK_SET_HEADER = 'Your Services'; // Variable Change name
+
+const loginScreenHeader = 'Enter Your ID:';
+const loginInputPlaceholder = 'Enter Your Tester ID';
+
+const HEADER_ONE_STYLE = {
+    fontFamily: 'Raleway-Bold',
+    fontSize: 48,
+    color: 'black',
+};
+const TITLE_STYLE = {
+    fontFamily: 'Raleway-Bold',
+    fontSize: 88,
+    color: 'black',
+};
+const BODY_BOLD_STYLE = {
+    fontFamily: 'Raleway-Bold',
+    fontSize: 24,
+    color: 'black',
+}
 
 function getLogo(serviceID) {
     switch (serviceID) {
-        case TODOIST_IMAGE:
+        case TODOIST_ID:
             return require('../../assets/images/Todoist_Logo.png');
-        case BLACKBOARD_IMAGE:
+        case BLACKBOARD_ID:
             return require('../../assets/images/blackboard_logo_2.png');
-        case MICROSOFT_TODO_IMAGE:
+        case MICROSOFT_TODO_ID:
             return require('../../assets/images/Microsoft_todo.png');
-        case GOOGLE_CALENDAR_IMAGE:
+        case GOOGLE_CALENDAR_ID:
             return require('../../assets/images/Google_Calendar.png');
         default:
             throw `logo not accessable:\n\t(1)logo may not exist as a resource or not (yet) accessable via this method
@@ -23,13 +51,13 @@ function getLogo(serviceID) {
 
 function getTokenFormatedServiceName(serviceID) {
     switch (serviceID) {
-        case TODOIST_IMAGE:
+        case TODOIST_ID:
             return 'Todoist';
-        case BLACKBOARD_IMAGE:
+        case BLACKBOARD_ID:
             return 'Black\nBoard';
-        case MICROSOFT_TODO_IMAGE:
+        case MICROSOFT_TODO_ID:
             return 'M.S.\nTodo';
-        case GOOGLE_CALENDAR_IMAGE:
+        case GOOGLE_CALENDAR_ID:
             return 'Google\nCalendar';
         default:
             throw `There is no Service Name formated for the token component, connected to the Service ID {`+serviceID+`}:
@@ -40,13 +68,13 @@ function getTokenFormatedServiceName(serviceID) {
 
 function getServiceName(serviceID) {
     switch (serviceID) {
-        case TODOIST_IMAGE:
+        case TODOIST_ID:
             return 'Todoist';
-        case BLACKBOARD_IMAGE:
+        case BLACKBOARD_ID:
             return 'BlackBoard';
-        case MICROSOFT_TODO_IMAGE:
+        case MICROSOFT_TODO_ID:
             return 'Microsoft Todo';
-        case GOOGLE_CALENDAR_IMAGE:
+        case GOOGLE_CALENDAR_ID:
             return 'Google Calendar';
         default:
             throw `There is no Service Name connected to the Service ID {`+serviceID+`}:
@@ -55,33 +83,23 @@ function getServiceName(serviceID) {
     }
 }
 
-const cancel = 'times';
-// const back;
-// const edit;
-// const scroll;
-// const enter;
-// const exit;
-
-const link_goto_icon = 'chevron-right';
-const link_add_icon = 'plus';
-
-function getIcon(iconEnum) {
-    // switch (key) {
-    //     case value:
-    //
-    //         break;
-    //     default:
-    //
-    //         break;
-    // }
-}
-
 export default {
     getLogo: getLogo,
     getTokenFormatedServiceName: getTokenFormatedServiceName,
     getServiceName: getServiceName,
-    TODOIST_IMAGE: TODOIST_IMAGE,
-    BLACKBOARD_IMAGE: BLACKBOARD_IMAGE,
-    MICROSOFT_TODO_IMAGE: MICROSOFT_TODO_IMAGE,
-    GOOGLE_CALENDAR_IMAGE: GOOGLE_CALENDAR_IMAGE
+    //Login page spefic type
+    loginInputPlaceholder: loginInputPlaceholder,
+    loginScreenHeader: loginScreenHeader,
+    //General Styles for type
+    TITLE_STYLE: TITLE_STYLE,
+    HEADER_ONE_STYLE: HEADER_ONE_STYLE,
+    BODY_BOLD_STYLE: BODY_BOLD_STYLE,
+    //
+    LINK_SET_HEADER: LINK_SET_HEADER,
+    //Icon Names for 
+    cancelIcon : cancelIcon,
+    doorOpenIcon : doorOpenIcon,
+    doorClosedIcon : doorClosedIcon,
+    chevronRightIcon : chevronRightIcon,
+    plusIcon : plusIcon,
 }

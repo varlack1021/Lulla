@@ -2,11 +2,12 @@ import React, {useRef} from "react";
 import { 
     TouchableWithoutFeedback,
     StyleSheet,
-    Animated
+    Animated,
+    View
 } from "react-native";
 import GradientView from "../native modules/GradientView";
 
-export default function SignatureButton({action, colors}) {
+export default function SignatureButton({action, colors, style}) {
     const ScalableGradient = Animated.createAnimatedComponent(GradientView);
     const componentScale = useRef(new Animated.Value(0)).current;
 
@@ -16,27 +17,29 @@ export default function SignatureButton({action, colors}) {
     });
 
     return(
-        <TouchableWithoutFeedback 
-            onPressIn={() => {
-                Animated.timing(componentScale, {
-                    toValue: 1,
-                    duration: 300,
-                    // easing: Easing.ease
-                }).start();
-            }}
-            onPressOut={() => {
-                Animated.timing(componentScale, {
-                    toValue: 0,
-                    duration: 1000,
-                    // easing: Easing.ease
-                }).start();
-                action();
-            }}>
-            <ScalableGradient style={[styles.container, {
-                backgroundColor: colors[0],
-                transform: [{scale: componentScaleRange}]
-                }]}/>
-        </TouchableWithoutFeedback>
+        <View style={style}>
+            <TouchableWithoutFeedback
+                onPressIn={() => {
+                    Animated.timing(componentScale, {
+                        toValue: 1,
+                        duration: 300,
+                        // easing: Easing.ease
+                    }).start();
+                }}
+                onPressOut={() => {
+                    Animated.timing(componentScale, {
+                        toValue: 0,
+                        duration: 1000,
+                        // easing: Easing.ease
+                    }).start();
+                    action();
+                }}>
+                <ScalableGradient style={[styles.container, {
+                    backgroundColor: colors[0],
+                    transform: [{scale: componentScaleRange}]
+                    }]}/>
+            </TouchableWithoutFeedback>
+        </View>
     );
 }
 

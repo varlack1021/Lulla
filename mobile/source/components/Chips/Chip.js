@@ -35,7 +35,6 @@ export default function Chip({action, color, highlightColor, iconName, text, sty
                         toValue: 1,
                         duration: 500
                     }).start();
-                    action();
                 }}>
                 <Animated.View 
                     style={[styles.container, {
@@ -55,11 +54,12 @@ export default function Chip({action, color, highlightColor, iconName, text, sty
                                     toValue: 1,
                                     duration: 500
                                 }),
-                                Animated.timing(componentOpacity, {
-                                    toValue: 0,
-                                    duration: 500
-                                })
-                            ]).start();
+                                // Animated.timing(componentOpacity, {
+                                //     toValue: 0,
+                                //     duration: 500
+                                // })
+                            ]).start(action);
+                            
                         }}>
                         <Icon 
                             name={iconName}
@@ -81,15 +81,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 12
+        borderRadius: 8
     },
     icon: {
         paddingLeft: 8,
         paddingRight: 8
     },
     text: {
-        marginLeft: 8,
         marginRight: 8,
+        marginLeft: 8,
         color: '#FFFFFF',
         fontFamily: 'Raleway-Medium',
         fontSize: 16

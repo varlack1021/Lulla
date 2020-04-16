@@ -3,6 +3,9 @@ import { SafeAreaView } from "react-native";
 import { getStorybookUI, configure, addDecorator } from '@storybook/react-native';
 
 import './rn-addons';
+import LoginScreen from "../source/components/screens/LoginScreen";
+import InteractionMangementScreen from "../source/components/screens/InteractionManagementScreen";
+import SideBarScreen from "../source/components/screens/SideBarScreen";
 
 
 
@@ -11,6 +14,13 @@ addDecorator(storyFn => <SafeAreaView style={{flex: 1, justifyContent:"center", 
 
 // import stories
 configure(() => {
+  require('../source/components/TextLink/TextLink.stories');
+  require('../source/components/screens/LoginScreen.stories');
+  require('../source/components/screens/InteractionManagementScreen.stories');
+  require('../source/components/screens/ServicesScreen.stories');
+  require('../source/components/screens/SideBarScreen.stories');
+  require('../source/components/CheckedTextInput/CheckedTextInput.stories');
+  require('../source/components/PillButton/PillButton.stories');
   require('../source/components/items/IDBar.stories');
   require('../source/components/Links/Link.stories');
   require('../source/components/Chips/Chip.stories');
@@ -22,6 +32,8 @@ configure(() => {
   require('../source/components/headers/DualFocusHeader.stories');
   require('../source/components/Links/LinkSet.stories');
   require('../source/components/Tokens/TokenSet.stories');
+  require('../source/components/Chips/ChipSet.stories');
+  require('../source/components/Modal/Modal.stories');
 }, module);
 
 

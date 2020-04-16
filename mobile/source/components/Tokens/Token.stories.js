@@ -3,7 +3,7 @@ import Token from "./Token";
 import typography from "../../config/typography";
 import { storiesOf } from "@storybook/react-native";
 import { action } from "@storybook/addon-actions";
-
+import { BLACKBOARD_ID } from "../../config/values";
 
 
 storiesOf("Token", module)
@@ -11,6 +11,6 @@ storiesOf("Token", module)
                                 action={action('button-click')}
                                 color='#FFECBF'
                                 text={'Black\nBoard'}
-                                logoImage={typography.getLogo(typography.BLACKBOARD_IMAGE)}
+                                logoImage={typography.getLogo(BLACKBOARD_ID)}
                                 iconName='pen'
                                 iconColor='#FF9100'/>);
